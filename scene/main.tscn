@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=8 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" path="res://script/ui.gd" id="1_aqcnr"]
+[ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
 [ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
 [ext_resource type="Script" path="res://script/spine_sprite.gd" id="3_1oab7"]
 [ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
@@ -10,8 +11,10 @@
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_hya1h")
 
 [node name="UI" type="Node2D" parent="."]
+top_level = true
 script = ExtResource("1_aqcnr")
 
 [node name="dialog" type="Node2D" parent="UI"]
@@ -96,3 +99,4 @@ script = ExtResource("3_1oab7")
 [connection signal="pressed" from="UI/dialog/button_atlas" to="UI/dialog" method="_on_button_atlas_pressed"]
 [connection signal="files_selected" from="UI/dialog/file_img" to="UI/info/label_file" method="_on_file_img_files_selected"]
 [connection signal="pressed" from="UI/dialog/button_img" to="UI/dialog" method="_on_button_img_pressed"]
+[connection signal="pressed" from="UI/dialog/button_load" to="." method="_on_button_load_pressed"]
