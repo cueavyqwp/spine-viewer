@@ -27,6 +27,4 @@ func _input(_event: InputEvent) -> void:
 
 	zoom_factor = clamp( zoom_factor , 0.01 , 8 )
 
-	print(zoom_speed," ",zoom_factor)
-
 	scale = Vector2(zoom_factor, zoom_factor)

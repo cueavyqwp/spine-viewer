@@ -28,6 +28,9 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.skel")
+show_hidden_files = true
+use_native_dialog = true
 
 [node name="button_skel" type="Button" parent="UI/dialog"]
 offset_left = 20.0
@@ -45,6 +48,9 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.atlas", ".txt")
+show_hidden_files = true
+use_native_dialog = true
 
 [node name="button_atlas" type="Button" parent="UI/dialog"]
 offset_left = 240.0
@@ -62,6 +68,9 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 1
 access = 2
+filters = PackedStringArray("*.png", "*.*")
+show_hidden_files = true
+use_native_dialog = true
 
 [node name="button_img" type="Button" parent="UI/dialog"]
 offset_left = 460.0
