@@ -4,6 +4,8 @@ var last_mouse_position = Vector2.ZERO
 var zoom_factor = 1.0
 var zoom_speed = 0
 
+var animations: PackedStringArray = []
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("MouseRight"):
 		if last_mouse_position == Vector2.ZERO:

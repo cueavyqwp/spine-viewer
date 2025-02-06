@@ -40,6 +40,8 @@ func _process(_delta: float) -> void:
 
 func _on_button_load_pressed() -> void:
 	load_skeleton($UI/info/label_file.path_skel, $UI/info/label_file.path_atlas, $UI/info/label_file.path_img)
+	if "Idle_01" in $SpineSprite.animations:
+		$SpineSprite.get_animation_state().set_animation("Idle_01")
 
 func _on_button_unload_pressed() -> void:
 	$"UI/info/label_file".path_skel = ""
@@ -65,6 +67,9 @@ func load_skeleton(path_skel: String, path_atlas: String, path_img: PackedString
 	skeleton_data_res.skeleton_file_res = skeleton_file_res
 	skeleton_data_res.atlas_res = atlas_res
 	$SpineSprite.skeleton_data_res = skeleton_data_res
+	$SpineSprite.animations = []
+	for animation in $SpineSprite.skeleton_data_res.get_animations():
+		$SpineSprite.animations.append(animation.get_name())
 
 func load_file(path: String) -> void:
 	var suffix = path.get_extension()
