@@ -39,9 +39,16 @@ func _process(_delta: float) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _on_button_load_pressed() -> void:
+	if not ($UI/info/label_file.path_skel and $UI/info/label_file.path_atlas):
+		OS.alert("请选择skel文件与atlas文件", "无法加载")
+		return
 	load_skeleton($UI/info/label_file.path_skel, $UI/info/label_file.path_atlas, $UI/info/label_file.path_img)
-	if "Idle_01" in $SpineSprite.animations:
-		$SpineSprite.get_animation_state().set_animation("Idle_01")
+	$"UI/control/option_animation".clear()
+	for index in range($SpineSprite.animations.size()):
+		var animation = $SpineSprite.animations[index]
+		$"UI/control/option_animation".add_item(animation, index)
+		if animation == "Idle_01":
+			$"UI/control/option_animation".select_animation(index)
 
 func _on_button_unload_pressed() -> void:
 	$"UI/info/label_file".path_skel = ""
