@@ -8,3 +8,6 @@ func _on_button_atlas_pressed() -> void:
 
 func _on_button_img_pressed() -> void:
 	$file_img.show()
+
+func _on_button_dir_pressed() -> void:
+	$file_dir.show()

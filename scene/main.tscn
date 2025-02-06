@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=6 format=3 uid="uid://stfwkixhy28h"]
 
-[ext_resource type="Script" path="res://script/ui.gd" id="1_aqcnr"]
 [ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
 [ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
 [ext_resource type="Script" path="res://script/spine_sprite.gd" id="3_1oab7"]
 [ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_kskly"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
 
@@ -15,7 +12,6 @@ script = ExtResource("1_hya1h")
 
 [node name="UI" type="Node2D" parent="."]
 top_level = true
-script = ExtResource("1_aqcnr")
 
 [node name="dialog" type="Node2D" parent="UI"]
 script = ExtResource("2_7isqu")
@@ -80,22 +76,49 @@ offset_bottom = 60.0
 focus_mode = 0
 text = "选择图片"
 
+[node name="file_dir" type="FileDialog" parent="UI/dialog"]
+auto_translate_mode = 1
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(400, 400)
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="button_dir" type="Button" parent="UI/dialog"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 660.0
+offset_bottom = 120.0
+focus_mode = 0
+text = "选择文件夹"
+
 [node name="button_load" type="Button" parent="UI/dialog"]
 offset_left = 20.0
-offset_top = 260.0
+offset_top = 280.0
 offset_right = 660.0
-offset_bottom = 300.0
+offset_bottom = 320.0
 focus_mode = 0
 text = "加载"
+
+[node name="button_unload" type="Button" parent="UI/dialog"]
+offset_left = 20.0
+offset_top = 340.0
+offset_right = 660.0
+offset_bottom = 380.0
+focus_mode = 0
+text = "清空"
 
 [node name="info" type="Node2D" parent="UI"]
 
 [node name="label_file" type="Label" parent="UI/info"]
 offset_left = 20.0
-offset_top = 80.0
+offset_top = 140.0
 offset_right = 660.0
-offset_bottom = 240.0
-label_settings = SubResource("LabelSettings_kskly")
+offset_bottom = 260.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 script = ExtResource("3_xv71d")
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
@@ -108,4 +131,7 @@ script = ExtResource("3_1oab7")
 [connection signal="pressed" from="UI/dialog/button_atlas" to="UI/dialog" method="_on_button_atlas_pressed"]
 [connection signal="files_selected" from="UI/dialog/file_img" to="UI/info/label_file" method="_on_file_img_files_selected"]
 [connection signal="pressed" from="UI/dialog/button_img" to="UI/dialog" method="_on_button_img_pressed"]
+[connection signal="dir_selected" from="UI/dialog/file_dir" to="." method="_on_file_dir_dir_selected"]
+[connection signal="pressed" from="UI/dialog/button_dir" to="UI/dialog" method="_on_button_dir_pressed"]
 [connection signal="pressed" from="UI/dialog/button_load" to="." method="_on_button_load_pressed"]
+[connection signal="pressed" from="UI/dialog/button_unload" to="." method="_on_button_unload_pressed"]

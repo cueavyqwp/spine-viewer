@@ -25,6 +25,6 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_released("WheelDown"):
 		zoom_factor -= zoom_speed
 
-	zoom_factor = clamp( zoom_factor , 0.01 , 8 )
+	zoom_factor = clamp(zoom_factor, 0.01, 8)
 
 	scale = Vector2(zoom_factor, zoom_factor)

@@ -2,6 +2,8 @@
 .godot/
 /android/
 
+export_presets.cfg
+.vscode/
 *.otf
 *.tmp
 *.exe
