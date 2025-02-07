@@ -19,6 +19,8 @@ func _on_item_selected(index: int) -> void:
 	select(index - index % 3)
 
 func _on_option_play_pressed() -> void:
+	if not $"../../../SpineSprite".get_animation_state():
+		return
 	$"../../../SpineSprite".get_animation_state().clear_tracks()
 	for num in range(int(item_count / 3)):
 		num = num * 3

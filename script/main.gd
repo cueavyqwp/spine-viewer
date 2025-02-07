@@ -67,6 +67,16 @@ func _process(_delta: float) -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
+	$"UI/info/label_fps".text = "FPS:%d" % Engine.get_frames_per_second()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_ENTER:
+				$"UI/control/option_list_animation/option_animation"._on_item_selected($"UI/control/option_list_animation/option_animation".get_selected_id())
+			elif event.keycode == KEY_SPACE:
+				$"UI/control/list_animation"._on_option_play_pressed()
+
 func _on_button_load_pressed() -> void:
 	if not ($UI/info/label_file.path_skel and $UI/info/label_file.path_atlas):
 		OS.alert("请选择skel文件与atlas文件", "无法加载")
