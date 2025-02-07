@@ -7,9 +7,15 @@
 
 # 关于
 
-这个项目目标是查看Blue Archive里的 纪念大厅&角色立绘
+用于查看与播放Blue Archive里的 纪念大厅&角色立绘
+
+理论上其它Spine4的动画也可以播放
 
 目前还在开发中 ~~(自己没时间而且还不会Godot)~~
+
+# 下载
+
+点击[发行版](https://github.com/cueavyqwp/spine-viewer/releases)可以找到导出好的`.exe`文件
 
 # 运行
 
