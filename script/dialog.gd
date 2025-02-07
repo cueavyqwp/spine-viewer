@@ -1,13 +1,13 @@
 extends Node2D
 
 func _on_button_skel_pressed() -> void:
-	$file_skel.show()
+	$"button_skel/file_skel".show()
 
 func _on_button_atlas_pressed() -> void:
-	$file_atlas.show()
+	$"button_atlas/file_atlas".show()
 
 func _on_button_img_pressed() -> void:
-	$file_img.show()
+	$"button_img/file_img".show()
 
 func _on_button_dir_pressed() -> void:
-	$file_dir.show()
+	$"button_dir/file_dir".show()

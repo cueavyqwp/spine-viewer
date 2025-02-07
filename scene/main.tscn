@@ -1,18 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=9 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
 [ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
 [ext_resource type="Script" path="res://script/spine_sprite.gd" id="3_1oab7"]
 [ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
+[ext_resource type="Script" path="res://script/list_animation.gd" id="4_813iw"]
 [ext_resource type="Script" path="res://script/option_animation.gd" id="4_d30j4"]
+[ext_resource type="Script" path="res://script/camera_2d.gd" id="8_1hhml"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hya1h")
 
-[node name="UI" type="Node2D" parent="."]
-top_level = true
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="dialog" type="Node2D" parent="UI"]
 script = ExtResource("2_7isqu")
@@ -33,7 +34,7 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.skel")
+filters = PackedStringArray("*.skel,*.json")
 show_hidden_files = true
 use_native_dialog = true
 
@@ -53,7 +54,7 @@ size = Vector2i(400, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.atlas", ".txt")
+filters = PackedStringArray("*.atlas,*.txt")
 show_hidden_files = true
 use_native_dialog = true
 
@@ -124,17 +125,88 @@ script = ExtResource("3_xv71d")
 
 [node name="control" type="Node2D" parent="UI"]
 
-[node name="option_animation" type="OptionButton" parent="UI/control"]
+[node name="list_animation" type="ItemList" parent="UI/control"]
+offset_left = 760.0
+offset_top = 80.0
+offset_right = 1080.0
+offset_bottom = 320.0
+focus_mode = 0
+max_columns = 3
+same_column_width = true
+script = ExtResource("4_813iw")
+
+[node name="option_list_animation" type="Node2D" parent="UI/control"]
+
+[node name="option_animation" type="OptionButton" parent="UI/control/option_list_animation"]
 offset_left = 760.0
 offset_top = 20.0
-offset_right = 1080.0
+offset_right = 980.0
 offset_bottom = 60.0
 focus_mode = 0
 script = ExtResource("4_d30j4")
 
+[node name="option_play" type="Button" parent="UI/control/option_list_animation"]
+offset_left = 1000.0
+offset_top = 20.0
+offset_right = 1080.0
+offset_bottom = 60.0
+focus_mode = 0
+text = "播放"
+
+[node name="option_loop" type="CheckButton" parent="UI/control/option_list_animation"]
+offset_left = 760.0
+offset_top = 340.0
+offset_right = 848.0
+offset_bottom = 380.0
+focus_mode = 0
+text = "循环:"
+
+[node name="option_track" type="OptionButton" parent="UI/control/option_list_animation"]
+offset_left = 860.0
+offset_top = 345.0
+offset_right = 900.0
+offset_bottom = 375.0
+focus_mode = 0
+selected = 0
+item_count = 4
+popup/item_0/text = "0"
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+
+[node name="option_add" type="Button" parent="UI/control/option_list_animation"]
+offset_left = 920.0
+offset_top = 340.0
+offset_right = 960.0
+offset_bottom = 380.0
+focus_mode = 0
+text = "添加"
+
+[node name="option_remove" type="Button" parent="UI/control/option_list_animation"]
+offset_left = 980.0
+offset_top = 340.0
+offset_right = 1020.0
+offset_bottom = 380.0
+focus_mode = 0
+text = "移除"
+
+[node name="option_clear" type="Button" parent="UI/control/option_list_animation"]
+offset_left = 1040.0
+offset_top = 340.0
+offset_right = 1080.0
+offset_bottom = 380.0
+focus_mode = 0
+text = "清空"
+
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_v4873")
 script = ExtResource("3_1oab7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("8_1hhml")
 
 [connection signal="pressed" from="UI/dialog/button_skel" to="UI/dialog" method="_on_button_skel_pressed"]
 [connection signal="file_selected" from="UI/dialog/button_skel/file_skel" to="UI/info/label_file" method="_on_file_skel_file_selected"]
@@ -146,4 +218,10 @@ script = ExtResource("3_1oab7")
 [connection signal="dir_selected" from="UI/dialog/button_dir/file_dir" to="." method="_on_file_dir_dir_selected"]
 [connection signal="pressed" from="UI/dialog/button_load" to="." method="_on_button_load_pressed"]
 [connection signal="pressed" from="UI/dialog/button_unload" to="." method="_on_button_unload_pressed"]
-[connection signal="item_selected" from="UI/control/option_animation" to="UI/control/option_animation" method="_on_item_selected"]
+[connection signal="item_selected" from="UI/control/list_animation" to="UI/control/list_animation" method="_on_item_selected"]
+[connection signal="multi_selected" from="UI/control/list_animation" to="UI/control/list_animation" method="_on_multi_selected"]
+[connection signal="item_selected" from="UI/control/option_list_animation/option_animation" to="UI/control/option_list_animation/option_animation" method="_on_item_selected"]
+[connection signal="pressed" from="UI/control/option_list_animation/option_play" to="UI/control/list_animation" method="_on_option_play_pressed"]
+[connection signal="pressed" from="UI/control/option_list_animation/option_add" to="UI/control/list_animation" method="_on_option_add_pressed"]
+[connection signal="pressed" from="UI/control/option_list_animation/option_remove" to="UI/control/list_animation" method="_on_option_remove_pressed"]
+[connection signal="pressed" from="UI/control/option_list_animation/option_clear" to="UI/control/list_animation" method="_on_option_clear_pressed"]
