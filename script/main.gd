@@ -104,9 +104,12 @@ func _on_button_unload_pressed() -> void:
 	$"UI/info/label_file".path_atlas = ""
 	$"UI/info/label_file".path_img = []
 
-func _on_file_dir_dir_selected(dir: String) -> void:
-	for file in DirAccess.open(dir).get_files():
-		load_file(dir.path_join(file))
+func _on_file_dir_dir_selected(path: String) -> void:
+	var directory =DirAccess.open(path)
+	for file in directory.get_files():
+		load_file(path.path_join(file))
+	for dir in directory.get_directories():
+		_on_file_dir_dir_selected(path.path_join(dir))
 
 func load_skeleton(path_skel: String, path_atlas: String, path_img: PackedStringArray) -> void:
 	var skeleton_file_res = SpineSkeletonFileResource.new()
