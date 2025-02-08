@@ -78,10 +78,10 @@ func _input(event: InputEvent) -> void:
 				$"UI/control/list_animation"._on_option_play_pressed()
 
 func _on_button_load_pressed() -> void:
-	if not ($UI/info/label_file.path_skel and $UI/info/label_file.path_atlas):
-		OS.alert("请选择skel文件与atlas文件", "无法加载")
+	if not ($"UI/info/label_file".path_skel and $"UI/info/label_file".path_atlas and $"UI/info/label_file".path_img):
+		OS.alert("请选择skel文件,atlas文件与图片", "无法加载")
 		return
-	load_skeleton($UI/info/label_file.path_skel, $UI/info/label_file.path_atlas, $UI/info/label_file.path_img)
+	load_skeleton($"UI/info/label_file".path_skel, $"UI/info/label_file".path_atlas, $"UI/info/label_file".path_img)
 	$"UI/control/option_list_animation/option_animation".clear()
 	for index in range($"UI/control/option_list_animation/option_animation".animations.size()):
 		var animation = $"UI/control/option_list_animation/option_animation".animations[index]

@@ -7,7 +7,7 @@ var zoom_factor = 1.0
 var zoom_speed = 0
 
 func _input(event: InputEvent) -> void:
-	zoom_speed = lerp(0.01, 1.0, zoom_factor / 10.0)
+	zoom_speed = lerp(0.10, 1.0, zoom_factor / 10.0)
 	if Input.is_action_pressed("Ctrl"):
 		zoom_speed *= 2
 	elif Input.is_action_pressed("Shift"):
@@ -28,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			start_position = Vector2.ZERO
 			zoom_factor -= zoom_speed
-		zoom_factor = clamp(zoom_factor, 0.01, 10)
+		zoom_factor = clamp(zoom_factor, 0.10, 5)
 	if event is not InputEventKey and is_drag and start_position:
 		position = start_camera_position + (start_position - event.position) / zoom_factor
 	if Input.is_action_pressed("Up"):
