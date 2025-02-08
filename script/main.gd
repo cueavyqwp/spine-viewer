@@ -42,6 +42,13 @@ func copy_file(path: String, to: String, override: bool = false) -> void:
 	file.close()
 	file_to.close()
 
+func change_hud() -> void:
+	show_hud = not show_hud
+	if show_hud:
+		$UI.show()
+	else:
+		$UI.hide()
+
 func _ready() -> void:
 	Engine.max_fps = 260
 
@@ -49,17 +56,20 @@ func _ready() -> void:
 
 	clear_tmp()
 
+	if OS.get_name() == "Android":
+		OS.request_permissions()
+		$"UI/dialog/button_skel/file_skel".current_dir = "/storage/emulated/0/"
+		$"UI/dialog/button_atlas/file_atlas".current_dir = "/storage/emulated/0/"
+		$"UI/dialog/button_img/file_img".current_dir = "/storage/emulated/0/"
+		$"UI/dialog/button_dir/file_dir".current_dir = "/storage/emulated/0/"
+
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		clear_tmp()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("HUD"):
-		show_hud = not show_hud
-		if show_hud:
-			$UI.show()
-		else:
-			$UI.hide()
+		change_hud()
 
 	if Input.is_action_just_pressed("Fullscreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:

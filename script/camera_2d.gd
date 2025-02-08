@@ -2,6 +2,8 @@ extends Camera2D
 
 var start_position = Vector2.ZERO
 var start_camera_position = Vector2.ZERO
+var start_touch_position = Vector2.ZERO
+var start_touch_index = 0
 var is_drag = false
 var zoom_factor = 1.0
 var zoom_speed = 0
@@ -28,7 +30,26 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			start_position = Vector2.ZERO
 			zoom_factor -= zoom_speed
-		zoom_factor = clamp(zoom_factor, 0.10, 5)
+	elif event is InputEventScreenTouch:
+		if event.index == 0:
+			start_touch_position = event.position
+			if event.is_pressed():
+				is_drag = true
+				start_position = event.position
+				start_camera_position = position
+			else:
+				is_drag = false
+				start_position = Vector2.ZERO
+				start_camera_position = Vector2.ZERO
+		else:
+			if event.pressed and event.index == 1 and start_touch_index == 1:
+				$"..".change_hud()
+				start_touch_index = -1
+			start_touch_index = event.index
+			is_drag = false
+			start_position = Vector2.ZERO
+			start_camera_position = Vector2.ZERO
+	zoom_factor = clamp(zoom_factor, 0.10, 5)
 	if event is not InputEventKey and is_drag and start_position:
 		position = start_camera_position + (start_position - event.position) / zoom_factor
 	if Input.is_action_pressed("Up"):
