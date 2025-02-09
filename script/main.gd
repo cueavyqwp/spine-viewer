@@ -87,6 +87,7 @@ func load_file(path: String) -> void:
 		spinesprite.path_img.append(path)
 
 func _on_files_dropped(files: PackedStringArray) -> void:
+	spinesprite.reset_path()
 	for path in files:
 		if Lib.is_file(path):
 			load_file(path)

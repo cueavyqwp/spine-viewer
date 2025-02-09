@@ -1,8 +1,8 @@
 extends SpineSprite
 
-var path_skel = "";
-var path_atlas = "";
-var path_img: PackedStringArray = [];
+var path_skel = ""
+var path_atlas = ""
+var path_img: PackedStringArray = []
 
 var animations: PackedStringArray = []
 var is_load = false;
@@ -30,6 +30,11 @@ func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_at
 	for animation in skeleton_data_res.get_animations():
 		animations.append(animation.get_name())
 	is_load = true
+
+func reset_path() -> void:
+	path_skel = ""
+	path_atlas = ""
+	path_img.clear()
 
 func reset_animation() -> void:
 	if is_load:
