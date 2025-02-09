@@ -1,6 +1,7 @@
 extends Node2D
 
 var show_hud = true
+var is_android = OS.get_name() == "Android"
 
 func get_directory(file_path: String) -> String:
 	if FileAccess.open(file_path, FileAccess.READ):
@@ -56,7 +57,7 @@ func _ready() -> void:
 
 	clear_tmp()
 
-	if OS.get_name() == "Android":
+	if is_android:
 		OS.request_permissions()
 		$"UI/dialog/button_skel/file_skel".current_dir = "/storage/emulated/0/"
 		$"UI/dialog/button_atlas/file_atlas".current_dir = "/storage/emulated/0/"
@@ -64,7 +65,7 @@ func _ready() -> void:
 		$"UI/dialog/button_dir/file_dir".current_dir = "/storage/emulated/0/"
 
 func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		clear_tmp()
 
 func _process(_delta: float) -> void:
@@ -105,7 +106,7 @@ func _on_button_unload_pressed() -> void:
 	$"UI/info/label_file".path_img = []
 
 func _on_file_dir_dir_selected(path: String) -> void:
-	var directory =DirAccess.open(path)
+	var directory = DirAccess.open(path)
 	for file in directory.get_files():
 		load_file(path.path_join(file))
 	for dir in directory.get_directories():

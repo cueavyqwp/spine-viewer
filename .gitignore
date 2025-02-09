@@ -3,7 +3,9 @@
 /android/
 
 export_presets.cfg
+*.keystore
 .vscode/
 *.otf
 *.tmp
 *.exe
+*.txt
