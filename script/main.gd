@@ -66,9 +66,7 @@ func _on_button_load_pressed() -> void:
 			option_animation.select_animation(index)
 
 func _on_button_unload_pressed() -> void:
-	spinesprite.path_skel = ""
-	spinesprite.path_atlas = ""
-	spinesprite.path_img = []
+	spinesprite.reset_path()
 
 func _on_file_dir_dir_selected(path: String) -> void:
 	var directory = DirAccess.open(path)
