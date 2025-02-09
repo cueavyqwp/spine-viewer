@@ -6,7 +6,7 @@ var spinesprite: SpineSprite
 func _ready() -> void:
 	spinesprite = $"../../../../SpineSprite"
 
-func get_item_name(index: int = get_index()) -> String:
+func get_item_name(index: int = get_selected_id()) -> String:
 	return get_item_text(index)
 
 func clear_all() -> void:
