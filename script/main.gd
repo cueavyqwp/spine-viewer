@@ -93,3 +93,6 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 			load_file(path)
 		elif Lib.is_directory(path):
 			_on_file_dir_dir_selected(path)
+		if len(spinesprite.path_img) >= 20:
+			spinesprite.path_img.resize(20)
+			break
