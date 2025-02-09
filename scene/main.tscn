@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=9 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
 [ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
 [ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
 [ext_resource type="Script" path="res://script/list_animation.gd" id="4_813iw"]
 [ext_resource type="Script" path="res://script/option_animation.gd" id="4_d30j4"]
+[ext_resource type="Script" path="res://script/spine_sprite.gd" id="6_hnifr"]
 [ext_resource type="Script" path="res://script/camera_2d.gd" id="8_1hhml"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
@@ -25,7 +26,7 @@ color = Color(0.625597, 0.625597, 0.625597, 0.392157)
 [node name="rect_animation" type="ColorRect" parent="UI/rect"]
 light_mask = 0
 offset_left = 760.0
-offset_right = 1120.0
+offset_right = 1160.0
 offset_bottom = 340.0
 color = Color(0.627451, 0.627451, 0.627451, 0.392157)
 
@@ -139,7 +140,7 @@ text = "清空"
 [node name="list_animation" type="ItemList" parent="UI/control"]
 offset_left = 780.0
 offset_top = 80.0
-offset_right = 1100.0
+offset_right = 1140.0
 offset_bottom = 260.0
 focus_mode = 0
 max_columns = 3
@@ -151,18 +152,26 @@ script = ExtResource("4_813iw")
 [node name="option_animation" type="OptionButton" parent="UI/control/option_list_animation"]
 offset_left = 780.0
 offset_top = 20.0
-offset_right = 1000.0
+offset_right = 980.0
 offset_bottom = 60.0
 focus_mode = 0
 script = ExtResource("4_d30j4")
 
 [node name="option_play" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1020.0
+offset_left = 1000.0
 offset_top = 20.0
-offset_right = 1100.0
+offset_right = 1080.0
 offset_bottom = 60.0
 focus_mode = 0
 text = "播放"
+
+[node name="option_reset" type="Button" parent="UI/control/option_list_animation"]
+offset_left = 1100.0
+offset_top = 20.0
+offset_right = 1140.0
+offset_bottom = 60.0
+focus_mode = 0
+text = "重置"
 
 [node name="option_loop" type="CheckButton" parent="UI/control/option_list_animation"]
 offset_left = 780.0
@@ -191,23 +200,23 @@ popup/item_3/id = 3
 [node name="option_add" type="Button" parent="UI/control/option_list_animation"]
 offset_left = 940.0
 offset_top = 280.0
-offset_right = 980.0
+offset_right = 1000.0
 offset_bottom = 320.0
 focus_mode = 0
 text = "添加"
 
 [node name="option_remove" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1000.0
+offset_left = 1020.0
 offset_top = 280.0
-offset_right = 1040.0
+offset_right = 1080.0
 offset_bottom = 320.0
 focus_mode = 0
 text = "移除"
 
 [node name="option_clear" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1060.0
+offset_left = 1100.0
 offset_top = 280.0
-offset_right = 1100.0
+offset_right = 1140.0
 offset_bottom = 320.0
 focus_mode = 0
 text = "清空"
@@ -258,6 +267,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_v4873")
+script = ExtResource("6_hnifr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("8_1hhml")
@@ -276,6 +286,7 @@ script = ExtResource("8_1hhml")
 [connection signal="multi_selected" from="UI/control/list_animation" to="UI/control/list_animation" method="_on_multi_selected"]
 [connection signal="item_selected" from="UI/control/option_list_animation/option_animation" to="UI/control/option_list_animation/option_animation" method="_on_item_selected"]
 [connection signal="pressed" from="UI/control/option_list_animation/option_play" to="UI/control/list_animation" method="_on_option_play_pressed"]
+[connection signal="pressed" from="UI/control/option_list_animation/option_reset" to="UI/control/list_animation" method="_on_option_reset_pressed"]
 [connection signal="pressed" from="UI/control/option_list_animation/option_add" to="UI/control/list_animation" method="_on_option_add_pressed"]
 [connection signal="pressed" from="UI/control/option_list_animation/option_remove" to="UI/control/list_animation" method="_on_option_remove_pressed"]
 [connection signal="pressed" from="UI/control/option_list_animation/option_clear" to="UI/control/list_animation" method="_on_option_clear_pressed"]
