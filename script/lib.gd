@@ -8,6 +8,10 @@ func clear_tmp() -> void:
 	else:
 		DirAccess.open("user://").make_dir("tmp")
 
+func quit(exit_code: int = 0) -> void:
+	clear_tmp()
+	get_tree().quit(exit_code)
+
 func get_directory(file_path: String) -> String:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if file:

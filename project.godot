@@ -12,10 +12,13 @@ config_version=5
 
 config/name="spine-viewer"
 config/description="spine-viewer"
-config/version="0.0.4"
+config/version="0.0.5"
 run/main_scene="res://scene/main.tscn"
+config/auto_accept_quit=false
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

@@ -4,6 +4,7 @@ var spinesprite: SpineSprite
 var option_animation: OptionButton
 
 var show_hud = true
+var quit_time = 0
 
 func change_hud() -> void:
 	show_hud = not show_hud
@@ -31,7 +32,17 @@ func _ready() -> void:
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		Lib.clear_tmp()
+		if Lib.is_android:
+			var interval = Time.get_unix_time_from_system() - quit_time
+			if not show_hud:
+				change_hud()
+			elif interval <= 2:
+				Lib.quit()
+			else:
+				$"UI/info/label_toast".show_message("再次返回退出", 2.0)
+				quit_time = Time.get_unix_time_from_system()
+		else:
+			Lib.quit()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("HUD"):

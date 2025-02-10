@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=10 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
 [ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
 [ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
 [ext_resource type="Script" path="res://script/list_animation.gd" id="4_813iw"]
 [ext_resource type="Script" path="res://script/option_animation.gd" id="4_d30j4"]
+[ext_resource type="Script" path="res://script/label_toast.gd" id="5_ymrys"]
 [ext_resource type="Script" path="res://script/spine_sprite.gd" id="6_hnifr"]
 [ext_resource type="Script" path="res://script/camera_2d.gd" id="8_1hhml"]
 
@@ -248,6 +249,19 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="info" type="Node2D" parent="UI"]
 
+[node name="label_toast" type="Label" parent="UI/info"]
+visible = false
+offset_right = 600.0
+offset_bottom = 80.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_ymrys")
+
+[node name="timer_toast" type="Timer" parent="UI/info/label_toast"]
+one_shot = true
+
 [node name="label_file" type="Label" parent="UI/info"]
 offset_left = 20.0
 offset_top = 140.0
@@ -300,3 +314,4 @@ script = ExtResource("8_1hhml")
 [connection signal="pressed" from="UI/control/option_list_animation/option_up" to="UI/control/list_animation" method="_on_option_up_pressed"]
 [connection signal="pressed" from="UI/control/option_list_animation/option_down" to="UI/control/list_animation" method="_on_option_down_pressed"]
 [connection signal="value_changed" from="UI/control/slider_zoom" to="Camera2D" method="_on_slider_zoom_value_changed"]
+[connection signal="timeout" from="UI/info/label_toast/timer_toast" to="UI/info/label_toast" method="_on_timer_toast_timeout"]
