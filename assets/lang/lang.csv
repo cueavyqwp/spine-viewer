@@ -1,0 +1,17 @@
+keys,en,zh
+Info,Camera Position:%.v%s\nCamera Zoom:%.2f\nFPS:%d,镜头位置:%.v%s\n镜头缩放:%.2f\n帧率:%d
+CameraLock,(Locked),(已锁定)
+FileDialogCancel,Cancel,取消
+FileDialogTitle0,Open a File,选择一个文件
+FileDialogOK0,Open,选择
+FileDialogTitle1,Open File(s),选择一些文件
+FileDialogOK1,Open,选择
+FileDialogTitle2,Open a Directory,选择一个文件夹
+FileDialogOK2,Select Current Folder,选择当前文件夹
+FileDialogTitle3,Open a File or Directory,选择一个文件或文件夹
+FileDialogOK3,Open,选择
+FileDialogTitle4,Save a File,保存文件至
+FileDialogOK4,Save,保存
+TabLoad,Load,加载
+TabLobby,Memorial Lobby,纪念大厅
+TabSetting,Settings,设置

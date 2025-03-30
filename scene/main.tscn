@@ -1,317 +1,263 @@
-[gd_scene load_steps=10 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=21 format=3 uid="uid://stfwkixhy28h"]
 
-[ext_resource type="Script" path="res://script/main.gd" id="1_hya1h"]
-[ext_resource type="Script" path="res://script/dialog.gd" id="2_7isqu"]
-[ext_resource type="Script" path="res://script/label_file.gd" id="3_xv71d"]
-[ext_resource type="Script" path="res://script/list_animation.gd" id="4_813iw"]
-[ext_resource type="Script" path="res://script/option_animation.gd" id="4_d30j4"]
-[ext_resource type="Script" path="res://script/label_toast.gd" id="5_ymrys"]
-[ext_resource type="Script" path="res://script/spine_sprite.gd" id="6_hnifr"]
+[ext_resource type="Script" path="res://script/root.gd" id="1_w7ckq"]
+[ext_resource type="Script" path="res://script/tab_container.gd" id="2_c0dr1"]
+[ext_resource type="Script" path="res://script/toast.gd" id="2_qdlsf"]
+[ext_resource type="Script" path="res://script/info.gd" id="2_wdfpu"]
+[ext_resource type="Script" path="res://script/file_dialog.gd" id="2_xonvi"]
+[ext_resource type="Script" path="res://script/spine_sprite.gd" id="6_lj884"]
 [ext_resource type="Script" path="res://script/camera_2d.gd" id="8_1hhml"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_a55bd"]
+line_spacing = 2.0
+font_size = 24
+shadow_color = Color(0.446777, 0.446777, 0.446777, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1atai"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ncwmk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6qbo"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.306923, 0.306923, 0.306923, 1)
+border_width_top = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbcij"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.359069, 0.359069, 0.359069, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jpbxa"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvhoc"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 0.627451)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 12.0
+expand_margin_top = 8.0
+expand_margin_right = 12.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="SpineAtlasResource" id="SpineAtlasResource_a14eb"]
+
+[sub_resource type="SpineSkeletonFileResource" id="SpineSkeletonFileResource_a0jl1"]
+
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
+atlas_res = SubResource("SpineAtlasResource_a14eb")
+skeleton_file_res = SubResource("SpineSkeletonFileResource_a0jl1")
 
-[node name="Main" type="Node2D"]
-script = ExtResource("1_hya1h")
+[sub_resource type="SpineAtlasResource" id="SpineAtlasResource_vu6pl"]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[sub_resource type="SpineSkeletonFileResource" id="SpineSkeletonFileResource_xeu0f"]
 
-[node name="rect" type="Node2D" parent="UI"]
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_asa6r"]
+atlas_res = SubResource("SpineAtlasResource_vu6pl")
+skeleton_file_res = SubResource("SpineSkeletonFileResource_xeu0f")
 
-[node name="rect_load" type="ColorRect" parent="UI/rect"]
-light_mask = 0
-offset_right = 680.0
-offset_bottom = 340.0
-color = Color(0.625597, 0.625597, 0.625597, 0.392157)
+[node name="Root" type="Node2D"]
+script = ExtResource("1_w7ckq")
 
-[node name="rect_animation" type="ColorRect" parent="UI/rect"]
-light_mask = 0
-offset_left = 700.0
-offset_right = 1120.0
-offset_bottom = 340.0
-color = Color(0.627451, 0.627451, 0.627451, 0.392157)
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
 
-[node name="rect_info" type="ColorRect" parent="UI/rect"]
-light_mask = 0
-offset_top = 360.0
-offset_right = 680.0
-offset_bottom = 460.0
-color = Color(0.627451, 0.627451, 0.627451, 0.392157)
+[node name="ColorRect" type="ColorRect" parent="BG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.362829, 0.362829, 0.362829, 1)
 
-[node name="dialog" type="Node2D" parent="UI"]
-script = ExtResource("2_7isqu")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="button_skel" type="Button" parent="UI/dialog"]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 220.0
-offset_bottom = 60.0
-focus_mode = 0
-text = "选择skel文件"
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="file_skel" type="FileDialog" parent="UI/dialog/button_skel"]
-auto_translate_mode = 1
-title = "Open a File"
-initial_position = 2
-size = Vector2i(400, 400)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.skel,*.json")
-show_hidden_files = true
-use_native_dialog = true
+[node name="Info" type="Label" parent="CanvasLayer/UI"]
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -48.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_a55bd")
+vertical_alignment = 2
+script = ExtResource("2_wdfpu")
 
-[node name="button_atlas" type="Button" parent="UI/dialog"]
-offset_left = 240.0
-offset_top = 20.0
-offset_right = 440.0
-offset_bottom = 60.0
-focus_mode = 0
-text = "选择atlas文件"
-
-[node name="file_atlas" type="FileDialog" parent="UI/dialog/button_atlas"]
-auto_translate_mode = 1
-title = "Open a File"
-initial_position = 2
-size = Vector2i(400, 400)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.atlas,*.txt")
-show_hidden_files = true
-use_native_dialog = true
-
-[node name="button_img" type="Button" parent="UI/dialog"]
-offset_left = 460.0
-offset_top = 20.0
-offset_right = 660.0
-offset_bottom = 60.0
-focus_mode = 0
-text = "选择图片"
-
-[node name="file_img" type="FileDialog" parent="UI/dialog/button_img"]
-auto_translate_mode = 1
-title = "Open File(s)"
-initial_position = 2
-size = Vector2i(400, 400)
-ok_button_text = "Open"
-file_mode = 1
-access = 2
-filters = PackedStringArray("*.png", "*.*")
-show_hidden_files = true
-use_native_dialog = true
-
-[node name="button_dir" type="Button" parent="UI/dialog"]
-offset_left = 20.0
-offset_top = 80.0
-offset_right = 660.0
-offset_bottom = 120.0
-focus_mode = 0
-text = "选择文件夹"
-
-[node name="file_dir" type="FileDialog" parent="UI/dialog/button_dir"]
-auto_translate_mode = 1
-title = "Open a Directory"
-initial_position = 2
-size = Vector2i(400, 400)
-ok_button_text = "Select Current Folder"
-file_mode = 2
+[node name="FileDialog" type="FileDialog" parent="CanvasLayer/UI"]
+initial_position = 4
+size = Vector2i(800, 600)
+ok_button_text = "Save"
 access = 2
 show_hidden_files = true
 use_native_dialog = true
+script = ExtResource("2_xonvi")
 
-[node name="button_load" type="Button" parent="UI/dialog"]
-offset_left = 20.0
-offset_top = 280.0
-offset_right = 330.0
-offset_bottom = 320.0
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ncwmk")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
+current_tab = 0
+tab_focus_mode = 0
+deselect_enabled = true
+script = ExtResource("2_c0dr1")
+
+[node name="TabLoad" type="Control" parent="CanvasLayer/UI/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HSplit" type="HSplitContainer" parent="CanvasLayer/UI/TabContainer/TabLoad"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 300
+
+[node name="ControlLoadList" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit"]
+layout_mode = 2
+
+[node name="LoadList" type="ItemList" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/ControlLoadList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
-text = "加载"
-
-[node name="button_unload" type="Button" parent="UI/dialog"]
-offset_left = 350.0
-offset_top = 280.0
-offset_right = 660.0
-offset_bottom = 320.0
-focus_mode = 0
-text = "清空"
-
-[node name="control" type="Node2D" parent="UI"]
-
-[node name="list_animation" type="ItemList" parent="UI/control"]
-offset_left = 720.0
-offset_top = 80.0
-offset_right = 1040.0
-offset_bottom = 260.0
-focus_mode = 0
-max_columns = 3
+theme_override_font_sizes/font_size = 32
+select_mode = 1
+allow_rmb_select = true
+allow_search = false
+auto_height = true
 same_column_width = true
-script = ExtResource("4_813iw")
 
-[node name="option_list_animation" type="Node2D" parent="UI/control"]
+[node name="VSplit" type="VSplitContainer" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit"]
+layout_mode = 2
 
-[node name="option_animation" type="OptionButton" parent="UI/control/option_list_animation"]
-offset_left = 720.0
-offset_top = 20.0
-offset_right = 940.0
-offset_bottom = 60.0
-focus_mode = 0
-script = ExtResource("4_d30j4")
+[node name="ControlInfo" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
+layout_mode = 2
 
-[node name="option_play" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 960.0
-offset_top = 20.0
-offset_right = 1100.0
-offset_bottom = 60.0
-focus_mode = 0
-text = "播放"
+[node name="Control" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit/ControlInfo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 
-[node name="option_loop" type="CheckButton" parent="UI/control/option_list_animation"]
-offset_left = 720.0
-offset_top = 280.0
-offset_right = 808.0
-offset_bottom = 320.0
-focus_mode = 0
-text = "循环:"
+[node name="Control2" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit/ControlInfo"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="option_track" type="OptionButton" parent="UI/control/option_list_animation"]
-offset_left = 820.0
-offset_top = 285.0
-offset_right = 860.0
-offset_bottom = 315.0
-focus_mode = 0
-selected = 0
-item_count = 4
-popup/item_0/text = "0"
-popup/item_1/text = "1"
-popup/item_1/id = 1
-popup/item_2/text = "2"
-popup/item_2/id = 2
-popup/item_3/text = "3"
-popup/item_3/id = 3
+[node name="ControlPack" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
+layout_mode = 2
 
-[node name="option_add" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 880.0
-offset_top = 280.0
-offset_right = 960.0
-offset_bottom = 320.0
-focus_mode = 0
-text = "添加"
-
-[node name="option_remove" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 980.0
-offset_top = 280.0
-offset_right = 1040.0
-offset_bottom = 320.0
-focus_mode = 0
-text = "移除"
-
-[node name="option_clear" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1060.0
-offset_top = 280.0
-offset_right = 1100.0
-offset_bottom = 320.0
-focus_mode = 0
-text = "清空"
-
-[node name="option_up" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1060.0
-offset_top = 80.0
-offset_right = 1100.0
-offset_bottom = 165.0
-focus_mode = 0
-text = "上移"
-
-[node name="option_down" type="Button" parent="UI/control/option_list_animation"]
-offset_left = 1060.0
-offset_top = 175.0
-offset_right = 1100.0
-offset_bottom = 260.0
-focus_mode = 0
-text = "下移"
-
-[node name="slider_zoom" type="HSlider" parent="UI/control"]
-offset_left = 140.0
-offset_top = 380.0
-offset_right = 660.0
-offset_bottom = 400.0
-focus_mode = 0
-min_value = 0.1
-max_value = 5.0
-step = 0.01
-value = 1.0
-
-[node name="slider_zoom_label" type="Label" parent="UI/control/slider_zoom"]
-layout_mode = 0
-offset_left = -120.0
-offset_bottom = 20.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-
-[node name="info" type="Node2D" parent="UI"]
-
-[node name="label_toast" type="Label" parent="UI/info"]
+[node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
-offset_right = 600.0
-offset_bottom = 80.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Toast" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_qdlsf")
+
+[node name="ToastLabel" type="Label" parent="CanvasLayer/Toast"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("5_ymrys")
 
-[node name="timer_toast" type="Timer" parent="UI/info/label_toast"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Toast/ToastLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvhoc")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Toast"]
 one_shot = true
-
-[node name="label_file" type="Label" parent="UI/info"]
-offset_left = 20.0
-offset_top = 140.0
-offset_right = 660.0
-offset_bottom = 260.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-clip_text = true
-text_overrun_behavior = 3
-max_lines_visible = 7
-script = ExtResource("3_xv71d")
-
-[node name="label_position" type="Label" parent="UI/info"]
-offset_left = 20.0
-offset_top = 400.0
-offset_right = 140.0
-offset_bottom = 420.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-
-[node name="label_fps" type="Label" parent="UI/info"]
-offset_left = 20.0
-offset_top = 420.0
-offset_right = 140.0
-offset_bottom = 440.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_v4873")
-script = ExtResource("6_hnifr")
+script = ExtResource("6_lj884")
+
+[node name="SpineBG" type="SpineSprite" parent="SpineSprite"]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_asa6r")
+
+[node name="SpineBoneEye" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "Touch_Eye"
+
+[node name="SpineBoneTouch" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "Touch_Point"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -900)
+zoom = Vector2(0.42, 0.42)
 script = ExtResource("8_1hhml")
 
-[connection signal="pressed" from="UI/dialog/button_skel" to="UI/dialog" method="_on_button_skel_pressed"]
-[connection signal="file_selected" from="UI/dialog/button_skel/file_skel" to="UI/info/label_file" method="_on_file_skel_file_selected"]
-[connection signal="pressed" from="UI/dialog/button_atlas" to="UI/dialog" method="_on_button_atlas_pressed"]
-[connection signal="file_selected" from="UI/dialog/button_atlas/file_atlas" to="UI/info/label_file" method="_on_file_atlas_file_selected"]
-[connection signal="pressed" from="UI/dialog/button_img" to="UI/dialog" method="_on_button_img_pressed"]
-[connection signal="files_selected" from="UI/dialog/button_img/file_img" to="UI/info/label_file" method="_on_file_img_files_selected"]
-[connection signal="pressed" from="UI/dialog/button_dir" to="UI/dialog" method="_on_button_dir_pressed"]
-[connection signal="dir_selected" from="UI/dialog/button_dir/file_dir" to="." method="_on_file_dir_dir_selected"]
-[connection signal="pressed" from="UI/dialog/button_load" to="." method="_on_button_load_pressed"]
-[connection signal="pressed" from="UI/dialog/button_unload" to="." method="_on_button_unload_pressed"]
-[connection signal="item_selected" from="UI/control/list_animation" to="UI/control/list_animation" method="_on_item_selected"]
-[connection signal="multi_selected" from="UI/control/list_animation" to="UI/control/list_animation" method="_on_multi_selected"]
-[connection signal="item_selected" from="UI/control/option_list_animation/option_animation" to="UI/control/option_list_animation/option_animation" method="_on_item_selected"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_play" to="UI/control/list_animation" method="_on_option_play_pressed"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_add" to="UI/control/list_animation" method="_on_option_add_pressed"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_remove" to="UI/control/list_animation" method="_on_option_remove_pressed"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_clear" to="UI/control/list_animation" method="_on_option_clear_pressed"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_up" to="UI/control/list_animation" method="_on_option_up_pressed"]
-[connection signal="pressed" from="UI/control/option_list_animation/option_down" to="UI/control/list_animation" method="_on_option_down_pressed"]
-[connection signal="value_changed" from="UI/control/slider_zoom" to="Camera2D" method="_on_slider_zoom_value_changed"]
-[connection signal="timeout" from="UI/info/label_toast/timer_toast" to="UI/info/label_toast" method="_on_timer_toast_timeout"]
+[connection signal="timeout" from="CanvasLayer/Toast/Timer" to="CanvasLayer/Toast" method="_on_timer_timeout"]

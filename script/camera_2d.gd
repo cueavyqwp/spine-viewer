@@ -1,89 +1,87 @@
 extends Camera2D
 
-var start_position = Vector2.ZERO
-var start_camera_position = Vector2.ZERO
-var start_touch_position = Vector2.ZERO
-var start_touch_index = 0
-var is_drag = false
-var is_lock = false
-var zoom_factor = 1.0
-var zoom_speed = 0
+@export var speed_factor_normal: float = 1.0
+@export var speed_factor_fast: float = 2.0
+@export var speed_factor_slow: float = 0.5
+@export var zoom_speed: float = 0.05
+@export var zoom_min: float = 0.1
+@export var zoom_max: float = 5.0
+@export var is_lock: bool = false
+
+var speed_factor: float = 1.0
+var zoom_factor: float = zoom.x
+var is_drag: bool = false
+var start_position: Vector2 = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
-	zoom_speed = lerp(0.10, 1.0, zoom_factor / 10.0)
-	if Input.is_action_pressed("Ctrl"):
-		zoom_speed *= 2
-	elif Input.is_action_pressed("Shift"):
-		zoom_speed *= 0.05
 	if Input.is_action_just_pressed("Tab"):
 		is_lock = not is_lock
 	if Input.is_action_just_pressed("Home"):
 		position = Vector2.ZERO
+
+	if Input.is_action_pressed("Shift"):
+		speed_factor = speed_factor_slow
+	elif Input.is_action_pressed("Ctrl"):
+		speed_factor = speed_factor_fast
+	else:
+		speed_factor = speed_factor_normal
+
+	if not is_lock:
+		if Input.is_action_pressed("Up"):
+			position.y -= 1 * speed_factor
+		if Input.is_action_pressed("Down"):
+			position.y += 1 * speed_factor
+		if Input.is_action_pressed("Left"):
+			position.x -= 1 * speed_factor
+		if Input.is_action_pressed("Right"):
+			position.x += 1 * speed_factor
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.is_pressed():
+			if is_lock:
+				start_position = Vector2.ZERO
+			elif event.is_pressed():
 				is_drag = true
 				start_position = event.position
-				start_camera_position = position
 			else:
 				is_drag = false
 				start_position = Vector2.ZERO
-				start_camera_position = Vector2.ZERO
+
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			start_position = Vector2.ZERO
-			zoom_factor += zoom_speed
+			zoom_factor *= 1.0 + zoom_speed * speed_factor
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			start_position = Vector2.ZERO
-			zoom_factor -= zoom_speed
+			zoom_factor *= 1.0 - zoom_speed * speed_factor
+
+	elif event is InputEventMouseMotion:
+		if is_drag:
+			position -= (event.position - start_position) / Vector2(zoom_factor, zoom_factor)
+			start_position = event.position
+
 	elif event is InputEventScreenTouch:
 		if event.index == 0:
 			if event.double_tap:
 				is_lock = not is_lock
+			elif is_lock:
+				start_position = Vector2.ZERO
 			else:
-				start_touch_position = event.position
-				if event.is_pressed():
-					is_drag = true
-					start_position = event.position
-					start_camera_position = position
-				else:
-					is_drag = false
-					start_position = Vector2.ZERO
-					start_camera_position = Vector2.ZERO
+				is_drag = true
+				start_position = event.position
 		else:
-			if event.pressed:
-				if event.index == 1 and start_touch_index == 1:
-					$"..".change_hud()
-					start_touch_index = -1
-				else:
-					start_touch_index = event.index
 			is_drag = false
-			start_position = Vector2.ZERO
-			start_camera_position = Vector2.ZERO
-	zoom_factor = clamp(zoom_factor, 0.10, 5)
-	if is_lock:
-		is_drag = false
-		start_position = Vector2.ZERO
-		start_camera_position = Vector2.ZERO
-	else:
-		if event is not InputEventKey and is_drag and start_position:
-			position = start_camera_position + (start_position - event.position) / zoom_factor
-		if Input.is_action_pressed("Up"):
-			position.y -= 1
-		if Input.is_action_pressed("Down"):
-			position.y += 1
-		if Input.is_action_pressed("Left"):
-			position.x -= 1
-		if Input.is_action_pressed("Right"):
-			position.x += 1
+
+	elif event is InputEventScreenDrag:
+		if event.index == 0:
+			if is_lock:
+				start_position = Vector2.ZERO
+			elif is_drag:
+				position -= (event.position - start_position) / Vector2(zoom_factor, zoom_factor)
+			else:
+				is_drag = true
+			start_position = event.position
+		else:
+			is_drag = false
+
+	zoom_factor = clamp(zoom_factor, zoom_min, zoom_max)
 
 func _process(delta: float) -> void:
 	zoom = lerp(zoom, Vector2(zoom_factor, zoom_factor), 8 * delta)
-	$"../UI/control/slider_zoom".set_value_no_signal(zoom.x)
-	$"../UI/control/slider_zoom/slider_zoom_label".text = "缩放比例:%.2f" % zoom.x
-	$"../UI/info/label_position".text = "相机位置(x,y):(%d,%d)" % [position.x, position.y]
-	if is_lock:
-		$"../UI/info/label_position".text += "(已锁定)"
-
-func _on_slider_zoom_value_changed(value: float) -> void:
-	zoom_factor = value
-	zoom = Vector2(value, value)

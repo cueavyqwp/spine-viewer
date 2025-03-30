@@ -11,9 +11,34 @@
 
 用于查看蔚蓝档案(Blue Archive)里的`纪念大厅`与`角色立绘`
 
-# 下载
+## 下载
 
 点击[发行版](https://github.com/cueavyqwp/spine-viewer/releases)即可
+
+
+## 获取日服Spine文件
+
+**注意:自安卓11起Android/data变得不好访问,可以尝试连接电脑访问,[Shizuku](https://github.com/RikkaApps/Shizuku)+[MT文件管理器](https://mt2.cn/),或者使用模拟器**
+
+转到`Android/data/com.YostarJP.BlueArchive/files/AssetBundls`目录下
+
+然后搜索`spine`,把搜索到的文件复制到一个文件夹下备用
+
+打开[AssetStudio](https://github.com/aelurum/AssetStudio)
+
+先更改导出设置`Options`>`Export options`将`Group exported assets by`选为 `container path full (with name)`
+
+`File`>`Load folder`然后选择文件夹
+
+过滤文件`Filter Type`只选中`TextAsset`与`Texture2D`
+
+然后导出`Export`>`Filtered assets`
+
+在导出的文件夹`Assets/_MX`下会有三个文件夹
+
+- `SpineBackground` 背景
+- `SpineCharacters` 立绘
+- `SpineLobbies` 纪念大厅
 
 # 功能
 
@@ -22,7 +47,7 @@
   - [ ] 纪念大厅背景(部分纪念大厅人物与背景被分成了两个文件)(计划加入)
   - [ ] 导出视频(计划加入)
 - 互动
-  - [ ] 眼部追踪(开发中)
+  - [x] 眼部追踪
   - [ ] 摸头(计划加入)
   - [ ] ~~捏脸~~(暂不加入)
 
@@ -34,6 +59,6 @@
 
 ## 导出到安卓
 
-导出到安卓平台时还需额外配置安卓SDK
+导出到安卓平台时还需额外配置JDK与安卓SDK
 
 然后在`导出`>`选项`>`权限`那里启用`Manage External Storage` `Read External Storage`与`Write External Storage`
