@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=18 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" path="res://script/root.gd" id="1_w7ckq"]
 [ext_resource type="Script" path="res://script/tab_container.gd" id="2_c0dr1"]
@@ -59,14 +59,6 @@ expand_margin_bottom = 8.0
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
 atlas_res = SubResource("SpineAtlasResource_a14eb")
 skeleton_file_res = SubResource("SpineSkeletonFileResource_a0jl1")
-
-[sub_resource type="SpineAtlasResource" id="SpineAtlasResource_vu6pl"]
-
-[sub_resource type="SpineSkeletonFileResource" id="SpineSkeletonFileResource_xeu0f"]
-
-[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_asa6r"]
-atlas_res = SubResource("SpineAtlasResource_vu6pl")
-skeleton_file_res = SubResource("SpineSkeletonFileResource_xeu0f")
 
 [node name="Root" type="Node2D"]
 script = ExtResource("1_w7ckq")
@@ -132,12 +124,13 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ncwmk")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
-current_tab = 0
+current_tab = 1
 tab_focus_mode = 0
 deselect_enabled = true
 script = ExtResource("2_c0dr1")
 
 [node name="TabLoad" type="Control" parent="CanvasLayer/UI/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -174,26 +167,10 @@ layout_mode = 2
 [node name="ControlInfo" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit/ControlInfo"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-
-[node name="Control2" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit/ControlInfo"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
 [node name="ControlPack" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
 layout_mode = 2
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -245,9 +222,6 @@ one_shot = true
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_v4873")
 script = ExtResource("6_lj884")
-
-[node name="SpineBG" type="SpineSprite" parent="SpineSprite"]
-skeleton_data_res = SubResource("SpineSkeletonDataResource_asa6r")
 
 [node name="SpineBoneEye" type="SpineBoneNode" parent="SpineSprite"]
 bone_name = "Touch_Eye"

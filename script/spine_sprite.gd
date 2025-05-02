@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 			get_animation_state().set_animation("LookEnd_01_M", false, 2)
 
 func _input(event: InputEvent) -> void:
-	if is_load and event is InputEventMouseButton:
+	if "Look_01_M" in animations and is_load and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				if not follow and spine_bone_eye.bone_mode == SpineConstant.BoneMode.BoneMode_Follow:
