@@ -49,9 +49,9 @@ func _process(delta: float) -> void:
 		if children:
 			l = children[0].get_data().get_length()
 		to = Lib.limit_range(pos, 0.8 * l, 0.4 * l, spine_bone_eye.rotation)
-		spine_bone_eye.position = lerp(spine_bone_eye.position, to, delta * 8)
+		spine_bone_eye.position = lerp(spine_bone_eye.position, to, delta * 12)
 	elif follow_end:
-		spine_bone_eye.position = lerp(spine_bone_eye.position, pos, delta * 8)
+		spine_bone_eye.position = lerp(spine_bone_eye.position, pos, delta * 12)
 		if Vector2i(spine_bone_eye.position) == Vector2i(pos):
 			follow_end = false
 			spine_bone_eye.bone_mode = SpineConstant.BoneMode.BoneMode_Follow

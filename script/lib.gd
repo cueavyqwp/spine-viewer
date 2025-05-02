@@ -71,8 +71,7 @@ func limit_range(origin: Vector2, b: float, c: float, theta: float = 0) -> Vecto
 	var a_sqr: float = b_sqr + pow(c * n, 2)
 	var k: float = 1.0
 	if theta:
-		theta -= PI * 0.5
 		relative_position = rotate_point(relative_position, theta)
-	if pow(relative_position.x, 2) / a_sqr + pow(relative_position.y, 2) / b_sqr > 1:
-		k = sqrt((b_sqr * a_sqr) / (pow(relative_position.x, 2) * b_sqr + pow(relative_position.y, 2) * a_sqr))
+	if pow(relative_position.y, 2) / a_sqr + pow(relative_position.x, 2) / b_sqr > 1:
+		k = sqrt((b_sqr * a_sqr) / (pow(relative_position.y, 2) * b_sqr + pow(relative_position.x, 2) * a_sqr))
 	return origin + rotate_point(relative_position, PI - theta) * k / n
