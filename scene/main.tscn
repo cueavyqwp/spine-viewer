@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=3 uid="uid://stfwkixhy28h"]
 
-[ext_resource type="Script" path="res://script/root.gd" id="1_w7ckq"]
-[ext_resource type="Script" path="res://script/tab_container.gd" id="2_c0dr1"]
-[ext_resource type="Script" path="res://script/toast.gd" id="2_qdlsf"]
-[ext_resource type="Script" path="res://script/info.gd" id="2_wdfpu"]
-[ext_resource type="Script" path="res://script/file_dialog.gd" id="2_xonvi"]
-[ext_resource type="Script" path="res://script/spine_sprite.gd" id="6_lj884"]
-[ext_resource type="Script" path="res://script/camera_2d.gd" id="8_1hhml"]
+[ext_resource type="Script" uid="uid://j5hbfwqbv2r" path="res://script/root.gd" id="1_w7ckq"]
+[ext_resource type="Script" uid="uid://ei7hxtmbd8sc" path="res://script/tab_container.gd" id="2_c0dr1"]
+[ext_resource type="Script" uid="uid://dm7u5trmo3v7b" path="res://script/toast.gd" id="2_qdlsf"]
+[ext_resource type="Script" uid="uid://1aqmkl861do1" path="res://script/info.gd" id="2_wdfpu"]
+[ext_resource type="Script" uid="uid://cc3ppavo7u8ar" path="res://script/file_dialog.gd" id="2_xonvi"]
+[ext_resource type="Script" uid="uid://dmhvdvtxll6jj" path="res://script/spine_sprite.gd" id="6_lj884"]
+[ext_resource type="Script" uid="uid://cagqcvr3q1iqd" path="res://script/camera_2d.gd" id="8_1hhml"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a55bd"]
 line_spacing = 2.0
@@ -17,7 +17,7 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1atai"]
 bg_color = Color(0.164706, 0.164706, 0.164706, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ncwmk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1hux"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6qbo"]
 content_margin_left = 16.0
@@ -104,7 +104,6 @@ script = ExtResource("2_wdfpu")
 [node name="FileDialog" type="FileDialog" parent="CanvasLayer/UI"]
 initial_position = 4
 size = Vector2i(800, 600)
-ok_button_text = "Save"
 access = 2
 show_hidden_files = true
 use_native_dialog = true
@@ -120,7 +119,7 @@ grow_vertical = 2
 theme_override_constants/side_margin = 0
 theme_override_font_sizes/font_size = 24
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ncwmk")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p1hux")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")

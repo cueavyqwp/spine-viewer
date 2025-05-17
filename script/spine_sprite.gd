@@ -1,5 +1,7 @@
 extends SpineSprite
 
+@onready var camera: Camera2D = $"../Camera2D"
+
 var path_skel = ""
 var path_atlas = ""
 var path_img: PackedStringArray = []
@@ -17,6 +19,9 @@ func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_at
 	is_load = true
 	if "Idle_01" in animations:
 		get_animation_state().set_animation("Idle_01", true, 0)
+		# TODO 加载时对齐画面(可选项)
+		# camera.zoom_factor = max(get_viewport_rect().size.x / skeleton_data_res.get_width(), get_viewport_rect().size.y / skeleton_data_res.get_height()) * 1.05
+		# camera.position = Vector2(4 / camera.zoom_factor, -skeleton_data_res.get_height()/2 + 200 / camera.zoom_factor )
 
 func reset_path() -> void:
 	path_skel = ""
