@@ -17,6 +17,14 @@ func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_at
 	for animation in skeleton_data_res.get_animations():
 		animations.append(animation.get_name())
 	is_load = true
+	# 重置眼部追踪与摸头
+	follow_end = false
+	pat_end = false
+	follow = false
+	pat = false
+	spine_bone_eye.bone_mode = SpineConstant.BoneMode.BoneMode_Follow
+	spine_bone_touch.bone_mode = SpineConstant.BoneMode.BoneMode_Follow
+	# 若存在待机动画则播放
 	if "Idle_01" in animations:
 		get_animation_state().set_animation("Idle_01", true, 0)
 		# TODO 加载时对齐画面(可选项)
