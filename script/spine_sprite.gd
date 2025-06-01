@@ -62,7 +62,9 @@ func _process(delta: float) -> void:
 		spine_bone_eye.position = lerp(spine_bone_eye.position, to, delta * 12)
 	elif follow_end:
 		spine_bone_eye.position = lerp(spine_bone_eye.position, pos, delta * 12)
-		if Vector2i(spine_bone_eye.position) == Vector2i(pos):
+		var diff = abs(abs(spine_bone_eye.position) - abs(pos))
+		diff = diff.x + diff.y
+		if diff <= 5:
 			follow_end = false
 			get_animation_state().set_animation("LookEnd_01_A", false, 1)
 			get_animation_state().set_animation("LookEnd_01_M", false, 2)
@@ -77,8 +79,10 @@ func _process(delta: float) -> void:
 		spine_bone_touch.position = lerp(spine_bone_touch.position, to, delta * 12)
 	elif pat_end:
 		spine_bone_touch.position = lerp(spine_bone_touch.position, pos, delta * 12)
-		if Vector2i(spine_bone_touch.position) == Vector2i(pos):
-			follow_end = false
+		var diff = abs(abs(spine_bone_touch.position) - abs(pos))
+		diff = diff.x + diff.y
+		if diff <= 5:
+			pat_end = false
 			get_animation_state().set_animation("PatEnd_01_A", false, 1)
 			get_animation_state().set_animation("PatEnd_01_M", false, 2)
 			spine_bone_touch.bone_mode = SpineConstant.BoneMode.BoneMode_Follow
