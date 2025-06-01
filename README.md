@@ -59,6 +59,13 @@
 - 没有特效
 - 眼部追踪轮廓不贴合
 
+# 已知问题
+
+- 尼禄 纪念大厅没有背景
+- 尼禄(制服) 纪念大厅摸头时头发飘逸?!
+- 日富美 眼部追踪与摸头失效
+- 吹雪(泳装) & 圣娅 纪念大厅过亮
+
 # 导出
 
 首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载带有spine-godot运行时的Godot4.4.1与对应的导出模板
