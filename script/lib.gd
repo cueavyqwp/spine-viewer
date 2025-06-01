@@ -75,3 +75,23 @@ func limit_range(origin: Vector2, b: float, c: float, theta: float = 0) -> Vecto
 	if pow(relative_position.y, 2) / a_sqr + pow(relative_position.x, 2) / b_sqr > 1:
 		k = sqrt((b_sqr * a_sqr) / (pow(relative_position.y, 2) * b_sqr + pow(relative_position.x, 2) * a_sqr))
 	return origin + rotate_point(relative_position, PI - theta) * k / n
+
+func limit_range_circle(origin: Vector2, radius: float) -> Vector2:
+	var local_mouse_position: Vector2 = get_local_mouse_position()
+	var relative_position: Vector2 = local_mouse_position - origin
+	var zoom: Vector2 = get_viewport().get_camera_2d().zoom
+	var viewport_size: Vector2 = Vector2(get_viewport_rect().size) / zoom
+	var origin_canvas: Vector2 = get_viewport().get_screen_transform() * get_global_transform_with_canvas() * origin / zoom
+	var max_radius = clamp(
+		min(origin_canvas.x, viewport_size.x - origin_canvas.x, origin_canvas.y, viewport_size.y - origin_canvas.y),
+		1,
+		INF
+	)
+	var final_radius = min(radius, max_radius)
+	if relative_position.length_squared() > final_radius * final_radius:
+		relative_position = relative_position.normalized() * final_radius
+	return origin + relative_position
+
+func judge_circle(origin: Vector2, radius: float) -> bool:
+	var point = abs(origin) - abs(get_local_mouse_position())
+	return pow(point.x, 2) + pow(point.y, 2) <= pow(radius, 2)
