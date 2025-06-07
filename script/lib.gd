@@ -60,8 +60,8 @@ func rotate_point(pos: Vector2, theta: float) -> Vector2:
 	var cos_theta = cos(theta)
 	return Vector2(pos.x * cos_theta + pos.y * sin_theta, pos.y * cos_theta - pos.x * sin_theta)
 
-func limit_range(origin: Vector2, b: float, c: float, theta: float = 0) -> Vector2:
-	var local_mouse_position: Vector2 = get_local_mouse_position()
+func limit_range(origin: Vector2, b: float, c: float, mouse_position: Vector2, theta: float = 0) -> Vector2:
+	var local_mouse_position: Vector2 = to_local(mouse_position)
 	var relative_position: Vector2 = origin - local_mouse_position
 	var zoom: Vector2 = get_viewport().get_camera_2d().zoom
 	var viewport_size: Vector2 = Vector2(get_viewport_rect().size) / zoom
@@ -76,8 +76,8 @@ func limit_range(origin: Vector2, b: float, c: float, theta: float = 0) -> Vecto
 		k = sqrt((b_sqr * a_sqr) / (pow(relative_position.y, 2) * b_sqr + pow(relative_position.x, 2) * a_sqr))
 	return origin + rotate_point(relative_position, PI - theta) * k / n
 
-func limit_range_circle(origin: Vector2, radius: float) -> Vector2:
-	var local_mouse_position: Vector2 = get_local_mouse_position()
+func limit_range_circle(origin: Vector2, radius: float, mouse_position: Vector2) -> Vector2:
+	var local_mouse_position: Vector2 = to_local(mouse_position)
 	var relative_position: Vector2 = local_mouse_position - origin
 	var zoom: Vector2 = get_viewport().get_camera_2d().zoom
 	var viewport_size: Vector2 = Vector2(get_viewport_rect().size) / zoom
@@ -92,6 +92,6 @@ func limit_range_circle(origin: Vector2, radius: float) -> Vector2:
 		relative_position = relative_position.normalized() * final_radius
 	return origin + relative_position
 
-func judge_circle(origin: Vector2, radius: float) -> bool:
-	var point = abs(origin) - abs(get_local_mouse_position())
+func judge_circle(origin: Vector2, radius: float, mouse_position: Vector2) -> bool:
+	var point = abs(origin) - abs(to_local(mouse_position))
 	return pow(point.x, 2) + pow(point.y, 2) <= pow(radius, 2)
