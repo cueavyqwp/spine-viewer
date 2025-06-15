@@ -126,12 +126,12 @@ class interact:
 					var to = Lib.limit_range(pos, 0.8 * l, 0.4 * l, mouse_position, self.spine_bone_eye.rotation)
 					self.spine_bone_eye.position = lerp(self.spine_bone_eye.position, to, delta * self.speed)
 	func talk():
-		# self.spine_sprite.get_animation_state().add_animation("Talk_0%d_M" % self.talk_index, 0.1, false, 1)
-		# self.spine_sprite.get_animation_state().add_animation("Talk_0%d_A" % self.talk_index, 0.1, false, 2)
-		# self.talk_index += 1
-		# if self.talk_index >= 5:
-		# 	self.talk_index = 0
-		pass
+		if self.spine_sprite.get_animation_state().get_current(0).get_animation().get_name() == "Idle_01" and self.spine_sprite.get_animation_state().get_current(2).is_complete():
+			self.talk_index += 1
+			self.spine_sprite.get_animation_state().set_animation("Talk_0%d_M" % self.talk_index, false, 1)
+			self.spine_sprite.get_animation_state().set_animation("Talk_0%d_A" % self.talk_index, false, 2)
+			if self.talk_index >= 5:
+				self.talk_index = 0
 
 @onready var interactr: interact = interact.new(self, spine_bone_eye, spine_bone_touch)
 
