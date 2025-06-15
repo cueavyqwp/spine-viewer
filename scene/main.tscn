@@ -173,10 +173,27 @@ layout_mode = 2
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
+[node name="TabAnimation" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="OptionAnimation" type="OptionButton" parent="CanvasLayer/UI/TabContainer/TabAnimation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 80.0
+grow_horizontal = 0
+focus_mode = 0
+
+[node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="Toast" type="Control" parent="CanvasLayer"]
 visible = false
