@@ -13,11 +13,13 @@
 
 <details>
 
-<summary>获取日服Spine文件</summary>
+<summary>获取Spine文件</summary>
 
-**注意:自安卓11起Android/data变得不好访问,可以尝试连接电脑访问,[Shizuku](https://github.com/RikkaApps/Shizuku)+[MT文件管理器](https://mt2.cn/),或者使用模拟器**
+日服: `Android/data/com.YostarJP.BlueArchive/files/AssetBundls`
 
-转到`Android/data/com.YostarJP.BlueArchive/files/AssetBundls`目录下
+国际服: `Android/data/com.nexon.bluearchive/files/PUB/Resource/[Preload/GameData]/Android`
+
+Steam: `steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resource/[Preload/GameData]/Windows`
 
 然后搜索`spine`,把搜索到的文件复制到一个文件夹下备用
 
@@ -70,7 +72,7 @@
 
 首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载带有spine-godot运行时的Godot4.4.1与对应的导出模板
 
-然后下载[unifont-16.0.03.otf](https://www.unifoundry.com/pub/unifont/unifont-16.0.03/font-builds/unifont-16.0.03.otf)字体,重命名为`unifont.otf`放到`assets`文件夹下
+然后下载[unifont-17.0.01.otf](https://www.unifoundry.com/pub/unifont/unifont-17.0.01/font-builds/unifont-17.0.01.otf)字体,重命名为`unifont.otf`放到`assets`文件夹下
 
 ## 导出到安卓
 
