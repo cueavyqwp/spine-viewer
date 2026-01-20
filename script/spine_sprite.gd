@@ -4,12 +4,11 @@ extends SpineSprite
 
 var path_skel = ""
 var path_atlas = ""
-var path_img: PackedStringArray = []
 
 var animations: PackedStringArray = []
 var is_load = false;
 
-func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_atlas, _path_img: PackedStringArray = path_img) -> void:
+func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_atlas) -> void:
 	skeleton_data_res.skeleton_file_res.load_from_file(_path_skel)
 	skeleton_data_res.atlas_res.load_from_atlas_file(_path_atlas)
 	skeleton_data_res.update_skeleton_data()
@@ -29,7 +28,6 @@ func load_skeleton(_path_skel: String = path_skel, _path_atlas: String = path_at
 func reset_path() -> void:
 	path_skel = ""
 	path_atlas = ""
-	path_img.clear()
 
 func reset_animation() -> void:
 	if is_load:
@@ -80,6 +78,8 @@ class interact:
 		self.start = false
 		self.end = true
 	func process(delta: float, mouse_position: Vector2):
+		if not self.spine_sprite.get_animation_state():
+			return
 		if self.time_last != -1.0 and Time.get_unix_time_from_system() - self.time_last > self.time_hold:
 			self.spine_sprite.get_animation_state().set_animation("Look_01_A", true, 1)
 			self.spine_sprite.get_animation_state().set_animation("Look_01_M", true, 2)
@@ -126,7 +126,8 @@ class interact:
 					var to = Lib.limit_range(pos, 0.8 * l, 0.4 * l, mouse_position, self.spine_bone_eye.rotation)
 					self.spine_bone_eye.position = lerp(self.spine_bone_eye.position, to, delta * self.speed)
 	func talk():
-		if self.spine_sprite.get_animation_state().get_current(0).get_animation().get_name() == "Idle_01" and self.spine_sprite.get_animation_state().get_current(2).is_complete():
+		var animation = self.spine_sprite.get_animation_state().get_current(2)
+		if self.spine_sprite.get_animation_state().get_current(0).get_animation().get_name() == "Idle_01" and animation and animation.is_complete():
 			self.talk_index += 1
 			self.spine_sprite.get_animation_state().set_animation("Talk_0%d_M" % self.talk_index, false, 1)
 			self.spine_sprite.get_animation_state().set_animation("Talk_0%d_A" % self.talk_index, false, 2)
@@ -139,7 +140,7 @@ func _ready() -> void:
 	self.connect("animation_event", _animation_event)
 
 func _animation_event(_sprite: SpineSprite, _state: SpineAnimationState, _entry: SpineTrackEntry, event: SpineEvent) -> void:
-	print(event.get_data().get_audio_path())
+	print(event.get_data().get_audio_path().to_lower())
 
 func _process(delta: float) -> void:
 	interactr.process(delta, get_global_mouse_position())

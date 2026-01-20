@@ -46,13 +46,11 @@ func _notification(what):
 
 func _on_files_dropped(files: PackedStringArray) -> void:
 	spinesprite.reset_path()
-	for path in files:
-		if ".skel" in path:
-			spinesprite.path_skel = path
-		if ".png" in path:
-			spinesprite.path_img.append(path)
-		if ".atlas" in path:
-			spinesprite.path_atlas = path
+		for path in files:
+			if ".skel" in path:
+				spinesprite.path_skel = path
+			if ".atlas" in path:
+				spinesprite.path_atlas = path
 	spinesprite.load_skeleton()
 
 func _on_size_changed() -> void:

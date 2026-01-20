@@ -70,11 +70,24 @@ Steam: `steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resour
 
 # 导出
 
-首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载带有spine-godot运行时的Godot4.4.1与对应的导出模板
+首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载`Godot 4.5.1 带 C# 支持`与对应的导出模板
 
-然后下载[unifont-17.0.01.otf](https://www.unifoundry.com/pub/unifont/unifont-17.0.01/font-builds/unifont-17.0.01.otf)字体,重命名为`unifont.otf`放到`assets`文件夹下
+解压下载下来的编辑器,将`godot-editor-windows-mono/GodotSharp/Tools/nupkgs`下的包复制到`godot-nuget`文件夹内
+
+安装[.Net SDK](https://dotnet.microsoft.com/zh-cn/download)
+
+然后下载[unifont-17.0.03.otf](https://www.unifoundry.com/pub/unifont/unifont-17.0.03/font-builds/unifont-17.0.03.otf)字体,重命名为`unifont.otf`放到`assets`文件夹下
+
+启动编辑器
+
+`编辑器` > `管理导出模板...` > `从文件安装`
+
+`项目` > `导出...`
 
 ## 导出到安卓
+
+> [!WARNING]
+> 目前spine-godot运行时没有提供`Godot 4.5.1 带 C# 支持`安卓平台的导出模板
 
 导出到安卓平台时还需额外配置JDK与安卓SDK
 

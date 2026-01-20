@@ -5,6 +5,7 @@
 export_presets.cfg
 *.keystore
 .vscode/
+*nupkg
 *.otf
 *.tmp
 *.exe

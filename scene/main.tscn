@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=19 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" uid="uid://j5hbfwqbv2r" path="res://script/root.gd" id="1_w7ckq"]
 [ext_resource type="Script" uid="uid://ei7hxtmbd8sc" path="res://script/tab_container.gd" id="2_c0dr1"]
 [ext_resource type="Script" uid="uid://dm7u5trmo3v7b" path="res://script/toast.gd" id="2_qdlsf"]
 [ext_resource type="Script" uid="uid://1aqmkl861do1" path="res://script/info.gd" id="2_wdfpu"]
-[ext_resource type="Script" uid="uid://cc3ppavo7u8ar" path="res://script/file_dialog.gd" id="2_xonvi"]
+[ext_resource type="Script" uid="uid://cwl7j17dtanmk" path="res://script/FileSelect.cs" id="3_of57s"]
+[ext_resource type="Script" uid="uid://cfwm1eidx2agp" path="res://script/Button.cs" id="5_b5f6u"]
 [ext_resource type="Script" uid="uid://dmhvdvtxll6jj" path="res://script/spine_sprite.gd" id="6_lj884"]
 [ext_resource type="Script" uid="uid://cagqcvr3q1iqd" path="res://script/camera_2d.gd" id="8_1hhml"]
 
@@ -14,18 +15,17 @@ font_size = 24
 shadow_color = Color(0.446777, 0.446777, 0.446777, 1)
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1hux"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1atai"]
 bg_color = Color(0.164706, 0.164706, 0.164706, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1hux"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6qbo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jpbxa"]
 content_margin_left = 16.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 12.0
-bg_color = Color(0.306923, 0.306923, 0.306923, 1)
-border_width_top = 4
+bg_color = Color(0.165656, 0.165656, 0.165656, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vbcij"]
 content_margin_left = 16.0
@@ -34,12 +34,13 @@ content_margin_right = 16.0
 content_margin_bottom = 12.0
 bg_color = Color(0.359069, 0.359069, 0.359069, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jpbxa"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6qbo"]
 content_margin_left = 16.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 12.0
-bg_color = Color(0.165656, 0.165656, 0.165656, 1)
+bg_color = Color(0.306923, 0.306923, 0.306923, 1)
+border_width_top = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvhoc"]
 bg_color = Color(0.235294, 0.235294, 0.235294, 0.627451)
@@ -107,7 +108,7 @@ size = Vector2i(800, 600)
 access = 2
 show_hidden_files = true
 use_native_dialog = true
-script = ExtResource("2_xonvi")
+script = ExtResource("3_of57s")
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
@@ -118,11 +119,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/side_margin = 0
 theme_override_font_sizes/font_size = 24
-theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_p1hux")
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
-theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
 current_tab = 1
 tab_focus_mode = 0
 deselect_enabled = true
@@ -172,6 +173,15 @@ layout_mode = 2
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/TabContainer/TabLobby"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 403.0
+offset_right = 954.0
+offset_bottom = 462.0
+text = "Test"
+script = ExtResource("5_b5f6u")
 
 [node name="TabAnimation" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
@@ -250,4 +260,5 @@ position = Vector2(0, -900)
 zoom = Vector2(0.42, 0.42)
 script = ExtResource("8_1hhml")
 
+[connection signal="pressed" from="CanvasLayer/UI/TabContainer/TabLobby/Button" to="CanvasLayer/UI/TabContainer/TabLobby/Button" method="_on_pressed"]
 [connection signal="timeout" from="CanvasLayer/Toast/Timer" to="CanvasLayer/Toast" method="_on_timer_timeout"]
