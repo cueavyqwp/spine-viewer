@@ -1,11 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=18 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" uid="uid://j5hbfwqbv2r" path="res://script/root.gd" id="1_w7ckq"]
 [ext_resource type="Script" uid="uid://ei7hxtmbd8sc" path="res://script/tab_container.gd" id="2_c0dr1"]
 [ext_resource type="Script" uid="uid://dm7u5trmo3v7b" path="res://script/toast.gd" id="2_qdlsf"]
 [ext_resource type="Script" uid="uid://1aqmkl861do1" path="res://script/info.gd" id="2_wdfpu"]
 [ext_resource type="Script" uid="uid://cwl7j17dtanmk" path="res://script/FileSelect.cs" id="3_of57s"]
-[ext_resource type="Script" uid="uid://cfwm1eidx2agp" path="res://script/Button.cs" id="5_b5f6u"]
 [ext_resource type="Script" uid="uid://dmhvdvtxll6jj" path="res://script/spine_sprite.gd" id="6_lj884"]
 [ext_resource type="Script" uid="uid://cagqcvr3q1iqd" path="res://script/camera_2d.gd" id="8_1hhml"]
 
@@ -174,15 +173,6 @@ layout_mode = 2
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/UI/TabContainer/TabLobby"]
-layout_mode = 0
-offset_left = 828.0
-offset_top = 403.0
-offset_right = 954.0
-offset_bottom = 462.0
-text = "Test"
-script = ExtResource("5_b5f6u")
-
 [node name="TabAnimation" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
 layout_mode = 2
@@ -260,5 +250,4 @@ position = Vector2(0, -900)
 zoom = Vector2(0.42, 0.42)
 script = ExtResource("8_1hhml")
 
-[connection signal="pressed" from="CanvasLayer/UI/TabContainer/TabLobby/Button" to="CanvasLayer/UI/TabContainer/TabLobby/Button" method="_on_pressed"]
 [connection signal="timeout" from="CanvasLayer/Toast/Timer" to="CanvasLayer/Toast" method="_on_timer_timeout"]
