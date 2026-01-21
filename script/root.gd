@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var spinesprite: SpineSprite = $"SpineSprite"
-@onready var toast: Control = $"CanvasLayer/Toast"
 @onready var ui: Control = $"CanvasLayer/UI"
 
 @export var show_hud: bool = true
@@ -33,27 +32,17 @@ func _process(_delta: float) -> void:
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_WM_GO_BACK_REQUEST:
-		if Lib.is_android:
-			if not show_hud:
-				change_hud()
-			elif Time.get_unix_time_from_system() - quit_time <= wait_time:
-				Lib.quit()
-			else:
-				toast.show_message("再次返回退出", wait_time)
-				quit_time = Time.get_unix_time_from_system()
-		else:
-			Lib.quit()
+		Lib.quit()
 
 func _on_files_dropped(files: PackedStringArray) -> void:
 	spinesprite.reset_path()
-		for path in files:
-			if ".skel" in path:
-				spinesprite.path_skel = path
-			if ".atlas" in path:
-				spinesprite.path_atlas = path
+	for path in files:
+		if ".skel" in path:
+			spinesprite.path_skel = path
+		if ".atlas" in path:
+			spinesprite.path_atlas = path
 	spinesprite.load_skeleton()
 
 func _on_size_changed() -> void:
 	var scale_ui = get_viewport_rect().size / Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 	ui.scale = scale_ui
-	toast.scale = ui.scale

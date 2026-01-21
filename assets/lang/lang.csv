@@ -1,5 +1,5 @@
 keys,en,zh
-Info,Camera Position:%.v%s\nCamera Zoom:%.2f\nFPS:%d,镜头位置:%.v%s\n镜头缩放:%.2f\n帧率:%d
+Info,Camera Position:${pos}\nCamera Zoom:${zoom}\nFPS:${fps},镜头位置:${pos}\n镜头缩放:${zoom}\n帧率:${fps}
 CameraLock,(Locked),(已锁定)
 FileDialogCancel,Cancel,取消
 FileDialogTitle0,Open a File,选择一个文件
