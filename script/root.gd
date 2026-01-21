@@ -4,7 +4,6 @@ extends Node2D
 @onready var ui: Control = $"CanvasLayer/UI"
 
 @export var show_hud: bool = true
-@export var wait_time: float = 2.0
 
 var quit_time = 0
 
@@ -21,7 +20,6 @@ func _ready() -> void:
 
 	Lib.clear_tmp()
 	_on_size_changed()
-
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("HUD"):
