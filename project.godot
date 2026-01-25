@@ -22,6 +22,10 @@ boot_splash/show_image=false
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
+[autoload]
+
+SpriteLoader="*res://script/SpriteLoader.gd"
+
 [debug]
 
 gdscript/warnings/integer_division=0
