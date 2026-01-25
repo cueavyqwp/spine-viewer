@@ -196,6 +196,7 @@ public partial class Sprite : SpineSprite
 					GD.Print("Table: Animation");
 					IsLobbyTable = false;
 					UpdateOption();
+					ItemSelected(OptionAnimation.GetSelectedId());
 					return;
 				}
 		}
@@ -208,6 +209,10 @@ public partial class Sprite : SpineSprite
 		}
 		var name = OptionDict[OptionAnimation.GetItemText(index)];
 		Reset();
+		if (name != "Idle_01" && name != "Start_Idle_01" && name != "Dummy" && HasAnimation("Idle_01"))
+		{
+			AnimationState.SetAnimation("Idle_01", true, (int)Idle);
+		}
 		AnimationState.SetAnimation(name, true, (int)General0);
 		if (name.Contains("_A"))
 		{
