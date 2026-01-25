@@ -9,6 +9,7 @@ public partial class Sprite : SpineSprite
 	public OptionButton OptionAnimation;
 	public AudioStreamPlayer BGMPlayer;
 	public AudioStreamPlayer TalkPlayer;
+	Dictionary<string, string> OptionDict = [];
 	public bool IsLobbyTable = true;
 	public string DirPath = null;
 	public void OnFilesDropped(string[] files)
@@ -159,9 +160,24 @@ public partial class Sprite : SpineSprite
 	public void UpdateOption()
 	{
 		OptionAnimation.Clear();
+		OptionDict.Clear();
 		foreach (var name in AnimationNames)
 		{
-			OptionAnimation.AddItem(name);
+			string value;
+			if (name.Contains("_A"))
+			{
+				value = name.Replace("_A", "");
+			}
+			else if (name.Contains("_M") && AnimationNames.Contains(name.Replace("_M", "_A")))
+			{
+				continue;
+			}
+			else
+			{
+				value = name;
+			}
+			OptionDict.Add(value, name);
+			OptionAnimation.AddItem(value);
 		}
 	}
 	public void TabChanged(int Tab)
@@ -190,9 +206,13 @@ public partial class Sprite : SpineSprite
 		{
 			return;
 		}
-		var name = OptionAnimation.GetItemText(index);
+		var name = OptionDict[OptionAnimation.GetItemText(index)];
 		Reset();
 		AnimationState.SetAnimation(name, true, (int)General0);
+		if (name.Contains("_A"))
+		{
+			AnimationState.SetAnimation(name.Replace("_A", "_M"), true, (int)General1);
+		}
 	}
 	public override void _Process(double delta)
 	{
