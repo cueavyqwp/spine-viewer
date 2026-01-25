@@ -1,6 +1,6 @@
 extends Node
 
-func Load(sprite: SpineSprite, skel: String, atlas: String):
+func load(sprite: SpineSprite, skel: String, atlas: String):
 	var data = SpineSkeletonDataResource.new()
 	var skel_res = SpineSkeletonFileResource.new()
 	var atlas_res = SpineAtlasResource.new()
@@ -9,3 +9,5 @@ func Load(sprite: SpineSprite, skel: String, atlas: String):
 	data.skeleton_file_res = skel_res
 	data.atlas_res = atlas_res
 	sprite.skeleton_data_res = data
+	if sprite.has_method("Init"):
+		sprite.call("Init")

@@ -103,60 +103,19 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
-current_tab = 1
+current_tab = 0
 tab_focus_mode = 0
 deselect_enabled = true
 script = ExtResource("4_p1hux")
 
-[node name="TabLoad" type="Control" parent="CanvasLayer/UI/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="HSplit" type="HSplitContainer" parent="CanvasLayer/UI/TabContainer/TabLoad"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-split_offset = 300
-
-[node name="ControlLoadList" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit"]
-layout_mode = 2
-
-[node name="LoadList" type="ItemList" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/ControlLoadList"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 32
-select_mode = 1
-allow_rmb_select = true
-allow_search = false
-auto_height = true
-same_column_width = true
-
-[node name="VSplit" type="VSplitContainer" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit"]
-layout_mode = 2
-
-[node name="ControlInfo" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
-layout_mode = 2
-
-[node name="ControlPack" type="Control" parent="CanvasLayer/UI/TabContainer/TabLoad/HSplit/VSplit"]
-layout_mode = 2
-
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 0
 
 [node name="TabAnimation" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 1
 
 [node name="OptionAnimation" type="OptionButton" parent="CanvasLayer/UI/TabContainer/TabAnimation"]
 layout_mode = 1
@@ -173,13 +132,19 @@ focus_mode = 0
 [node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 2
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
 update_mode = 1
 script = ExtResource("5_4j5ol")
 
+[node name="BGM" type="AudioStreamPlayer" parent="SpineSprite"]
+
+[node name="Talk" type="AudioStreamPlayer" parent="SpineSprite"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -900)
 zoom = Vector2(0.42, 0.42)
 script = ExtResource("6_4j5ol")
+
+[connection signal="animation_event" from="SpineSprite" to="SpineSprite" method="OnEvent"]
