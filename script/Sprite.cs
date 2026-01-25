@@ -6,8 +6,10 @@ using static TrackId;
 public partial class Sprite : SpineSprite
 {
 	public Node SpriteLoader;
+	public OptionButton OptionAnimation;
 	public AudioStreamPlayer BGMPlayer;
 	public AudioStreamPlayer TalkPlayer;
+	public bool IsLobbyTable = true;
 	public string DirPath = null;
 	public void OnFilesDropped(string[] files)
 	{
@@ -88,20 +90,18 @@ public partial class Sprite : SpineSprite
 	}
 	public void UnLoad()
 	{
-		SkeletonDataRes = new();
+		SkeletonDataRes = null;
 		DirPath = null;
 	}
 	public void Init()
 	{
 		GD.Print("See as: ", IsLobby ? "Lobby" : "Basic");
-		if (HasAnimation("Idle_01"))
-		{
-			GD.Print("Playing: Idle_01");
-			AnimationState.SetAnimation("Idle_01", trackId: (int)Idle);
-		}
+		UpdateOption();
+		TryIdle();
 	}
 	public SpineAnimationState AnimationState => GetAnimationState();
-	public Godot.Collections.Array<SpineAnimation> Animations => new(SkeletonDataRes.GetAnimations());
+	public SpineSkeleton Skeleton => GetSkeleton();
+	public Godot.Collections.Array<SpineAnimation> Animations => IsLoad ? new(SkeletonDataRes.GetAnimations()) : new();
 	public List<string> AnimationNames
 	{
 		get
@@ -136,10 +136,63 @@ public partial class Sprite : SpineSprite
 	public bool IsLobby => HasAnimation("Start_Idle_01");
 	public override void _Ready()
 	{
+		SkeletonDataRes = null;
 		SpriteLoader = GetNode<Node>("/root/SpriteLoader");
+		OptionAnimation = GetNode<OptionButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation");
 		BGMPlayer = GetNode<AudioStreamPlayer>("BGM");
 		TalkPlayer = GetNode<AudioStreamPlayer>("Talk");
 		GetTree().Root.FilesDropped += OnFilesDropped;
+	}
+	public void TryIdle()
+	{
+		if (HasAnimation("Idle_01"))
+		{
+			GD.Print("Playing: Idle_01");
+			AnimationState.SetAnimation("Idle_01", trackId: (int)Idle);
+		}
+	}
+	public void Reset()
+	{
+		AnimationState.ClearTracks();
+		Skeleton.SetToSetupPose();
+	}
+	public void UpdateOption()
+	{
+		OptionAnimation.Clear();
+		foreach (var name in AnimationNames)
+		{
+			OptionAnimation.AddItem(name);
+		}
+	}
+	public void TabChanged(int Tab)
+	{
+		switch (Tab)
+		{
+			case 0:
+				{
+					GD.Print("Table: Lobby");
+					IsLobbyTable = true;
+					TryIdle();
+					return;
+				}
+			case 1:
+				{
+					GD.Print("Table: Animation");
+					IsLobbyTable = false;
+					UpdateOption();
+					return;
+				}
+		}
+	}
+	public void ItemSelected(int index)
+	{
+		if (IsLobbyTable)
+		{
+			return;
+		}
+		var name = OptionAnimation.GetItemText(index);
+		Reset();
+		AnimationState.SetAnimation(name, true, (int)General0);
 	}
 	public override void _Process(double delta)
 	{
