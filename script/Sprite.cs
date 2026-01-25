@@ -7,6 +7,8 @@ public partial class Sprite : SpineSprite
 {
 	public Node SpriteLoader;
 	public OptionButton OptionAnimation;
+	public CheckButton IdleButton;
+	public CheckButton LoopButton;
 	public AudioStreamPlayer BGMPlayer;
 	public AudioStreamPlayer TalkPlayer;
 	Dictionary<string, string> OptionDict = [];
@@ -140,6 +142,8 @@ public partial class Sprite : SpineSprite
 		SkeletonDataRes = null;
 		SpriteLoader = GetNode<Node>("/root/SpriteLoader");
 		OptionAnimation = GetNode<OptionButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation");
+		IdleButton = GetNode<CheckButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/IdleButton");
+		LoopButton = GetNode<CheckButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/LoopButton");
 		BGMPlayer = GetNode<AudioStreamPlayer>("BGM");
 		TalkPlayer = GetNode<AudioStreamPlayer>("Talk");
 		GetTree().Root.FilesDropped += OnFilesDropped;
@@ -188,6 +192,7 @@ public partial class Sprite : SpineSprite
 				{
 					GD.Print("Table: Lobby");
 					IsLobbyTable = true;
+					Reset();
 					TryIdle();
 					return;
 				}
@@ -196,7 +201,11 @@ public partial class Sprite : SpineSprite
 					GD.Print("Table: Animation");
 					IsLobbyTable = false;
 					UpdateOption();
-					ItemSelected(OptionAnimation.GetSelectedId());
+					var index = OptionAnimation.GetSelectedId();
+					if (index != -1)
+					{
+						ItemSelected(index);
+					}
 					return;
 				}
 		}
@@ -208,16 +217,21 @@ public partial class Sprite : SpineSprite
 			return;
 		}
 		var name = OptionDict[OptionAnimation.GetItemText(index)];
+		var loop = LoopButton.ButtonPressed;
 		Reset();
-		if (name != "Idle_01" && name != "Start_Idle_01" && name != "Dummy" && HasAnimation("Idle_01"))
+		if (IdleButton.ButtonPressed && name != "Idle_01" && name != "Start_Idle_01" && name != "Dummy" && HasAnimation("Idle_01"))
 		{
-			AnimationState.SetAnimation("Idle_01", true, (int)Idle);
+			AnimationState.SetAnimation("Idle_01", loop, (int)Idle);
 		}
-		AnimationState.SetAnimation(name, true, (int)General0);
+		AnimationState.SetAnimation(name, loop, (int)General0);
 		if (name.Contains("_A"))
 		{
-			AnimationState.SetAnimation(name.Replace("_A", "_M"), true, (int)General1);
+			AnimationState.SetAnimation(name.Replace("_A", "_M"), loop, (int)General1);
 		}
+	}
+	public void ItemPressed()
+	{
+
 	}
 	public override void _Process(double delta)
 	{

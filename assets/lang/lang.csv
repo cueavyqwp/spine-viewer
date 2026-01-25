@@ -15,3 +15,5 @@ FileDialogOK4,Save,保存
 TabLobby,Memorial Lobby,记忆大厅
 TabAnimation,Animation,动画
 TabSetting,Settings,设置
+IdleButton,Idle,待机
+LoopButton,Loop,循环

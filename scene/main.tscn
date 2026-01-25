@@ -128,6 +128,35 @@ offset_right = -40.0
 offset_bottom = 80.0
 grow_horizontal = 0
 focus_mode = 0
+allow_reselect = true
+
+[node name="IdleButton" type="CheckButton" parent="CanvasLayer/UI/TabContainer/TabAnimation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 100.0
+offset_right = -40.0
+offset_bottom = 140.0
+grow_horizontal = 0
+focus_mode = 0
+button_pressed = true
+text = "IdleButton"
+
+[node name="LoopButton" type="CheckButton" parent="CanvasLayer/UI/TabContainer/TabAnimation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 160.0
+offset_right = -40.0
+offset_bottom = 200.0
+grow_horizontal = 0
+focus_mode = 0
+button_pressed = true
+text = "LoopButton"
 
 [node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
@@ -149,4 +178,5 @@ script = ExtResource("6_4j5ol")
 
 [connection signal="tab_changed" from="CanvasLayer/UI/TabContainer" to="SpineSprite" method="TabChanged"]
 [connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemSelected"]
+[connection signal="pressed" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemPressed"]
 [connection signal="animation_event" from="SpineSprite" to="SpineSprite" method="OnEvent"]
