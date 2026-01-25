@@ -22,10 +22,6 @@ boot_splash/show_image=false
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
-[autoload]
-
-Lib="*res://script/lib.gd"
-
 [debug]
 
 gdscript/warnings/integer_division=0
@@ -34,6 +30,7 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/transparent=true
 window/per_pixel_transparency/allowed=true
 window/vsync/vsync_mode=0
 
@@ -43,6 +40,7 @@ project/assembly_name="spine-viewer"
 
 [gui]
 
+theme/default_font_generate_mipmaps=true
 theme/custom_font="res://assets/unifont.otf"
 
 [input]
@@ -149,7 +147,11 @@ locale/translations=PackedStringArray("res://assets/lang/lang.en.translation", "
 
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-textures/default_filters/use_nearest_mipmap_filter=true
+textures/lossless_compression/force_png=true
+shader_compiler/shader_cache/enabled=false
+textures/default_filters/anisotropic_filtering_level=3
 anti_aliasing/quality/msaa_2d=2
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+textures/decals/filter=5
+textures/light_projectors/filter=5
 viewport/transparent_background=true

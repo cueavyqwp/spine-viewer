@@ -9,35 +9,35 @@
 
 目前还在开发中
 
-用于查看蔚蓝档案(Blue Archive)里的`纪念大厅`与`角色立绘`
+用于查看蔚蓝档案(Blue Archive)里的`记忆大厅`与`角色立绘`
 
 <details>
 
 <summary>获取Spine文件</summary>
 
-日服: `Android/data/com.YostarJP.BlueArchive/files/AssetBundls`
+日服:
+`Android/data/com.YostarJP.BlueArchive/files/AssetBundls`
+`YostarGames/BlueArchive_JP/BlueArchive_Data/StreamingAssets/AssetBundles`
 
-国际服: `Android/data/com.nexon.bluearchive/files/PUB/Resource/[Preload/GameData]/Android`
+国际服:
+`Android/data/com.nexon.bluearchive/files/PUB/Resource/[Preload/GameData]/Android`
+`steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resource/[Preload/GameData]/Windows`
 
-Steam: `steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resource/[Preload/GameData]/Windows`
+然后搜索`spine`
 
-然后搜索`spine`,把搜索到的文件复制到一个文件夹下备用
+`assets-_mx-spinelobbies` 前缀的为记忆大厅
 
-打开[AssetStudio](https://github.com/aelurum/AssetStudio)
+`assets-_mx-spinecharacters` 前缀的为立绘
 
-先更改导出设置`Options`>`Export options`将`Group exported assets by`选为 `container path full (with name)`
+以其名称或`CH`+`四位数字`开头的为已实装(或会实装)角色
 
-`File`>`Load folder`然后选择文件夹
+以其名称或`NP`+`四位数字`开头的为NPC(或未实装)角色
 
-过滤文件`Filter Type`只选中`TextAsset`与`Texture2D`
+把搜索到的文件复制到一个文件夹下备用
 
-然后导出`Export`>`Filtered assets`
+下载[AssetStudioModCLI](https://github.com/aelurum/AssetStudio)
 
-在导出的文件夹`Assets/_MX`下会有三个文件夹
-
-- `SpineBackground` 背景
-- `SpineCharacters` 立绘
-- `SpineLobbies` 纪念大厅
+`AssetStudioModCLI.exe [文件夹] -r -g none -o [输出文件夹] --filter-by-text .skel,.atlas,.png,ColorAdjustments`
 
 </details>
 
@@ -45,16 +45,15 @@ Steam: `steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resour
 
 点击[发行版](https://github.com/cueavyqwp/spine-viewer/releases)即可
 
-# 功能
+# 待办事项
 
 - 基本
   - [x] 查看功能
-  - [ ] 纪念大厅背景(部分纪念大厅人物与背景被分成了多个文件)(计划加入)
   - [ ] 导出视频(计划加入)
 - 互动
-  - [x] 眼部追踪
-  - [x] 摸头
-  - [ ] ~~捏脸~~(暂不计划加入)
+  - [ ] 眼部追踪
+  - [ ] 摸头
+  - [ ] 捏脸
 
 # 不足之处
 
@@ -83,12 +82,3 @@ Steam: `steamapps/common/BlueArchive/BlueArchive_Data/StreamingAssets/PUB/Resour
 `编辑器` > `管理导出模板...` > `从文件安装`
 
 `项目` > `导出...`
-
-## 导出到安卓
-
-> [!WARNING]
-> 目前spine-godot运行时没有提供`Godot 4.5.1 带 C# 支持`安卓平台的导出模板
-
-导出到安卓平台时还需额外配置JDK与安卓SDK
-
-然后在`导出`>`选项`>`权限`那里启用`Manage External Storage` `Read External Storage`与`Write External Storage`

@@ -1,11 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=13 format=3 uid="uid://stfwkixhy28h"]
 
-[ext_resource type="Script" uid="uid://j5hbfwqbv2r" path="res://script/root.gd" id="1_w7ckq"]
+[ext_resource type="Script" uid="uid://dbfrwj35brjkb" path="res://script/Main.cs" id="1_4j5ol"]
 [ext_resource type="Script" uid="uid://dntme8x7pnu64" path="res://script/Info.cs" id="2_4j5ol"]
 [ext_resource type="Script" uid="uid://cwl7j17dtanmk" path="res://script/FileSelect.cs" id="3_of57s"]
 [ext_resource type="Script" uid="uid://bjnweu6ih2igc" path="res://script/TabBar.cs" id="4_p1hux"]
+[ext_resource type="Script" uid="uid://bhntyiq6cwtlp" path="res://script/Sprite.cs" id="5_4j5ol"]
 [ext_resource type="Script" uid="uid://dxddlhll58r22" path="res://script/Camera.cs" id="6_4j5ol"]
-[ext_resource type="Script" uid="uid://dmhvdvtxll6jj" path="res://script/spine_sprite.gd" id="6_lj884"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a55bd"]
 line_spacing = 2.0
@@ -40,16 +40,8 @@ content_margin_bottom = 12.0
 bg_color = Color(0.306923, 0.306923, 0.306923, 1)
 border_width_top = 4
 
-[sub_resource type="SpineAtlasResource" id="SpineAtlasResource_a14eb"]
-
-[sub_resource type="SpineSkeletonFileResource" id="SpineSkeletonFileResource_a0jl1"]
-
-[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_v4873"]
-atlas_res = SubResource("SpineAtlasResource_a14eb")
-skeleton_file_res = SubResource("SpineSkeletonFileResource_a0jl1")
-
 [node name="Root" type="Node2D"]
-script = ExtResource("1_w7ckq")
+script = ExtResource("1_4j5ol")
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -1
@@ -184,14 +176,8 @@ layout_mode = 2
 metadata/_tab_index = 3
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
-skeleton_data_res = SubResource("SpineSkeletonDataResource_v4873")
-script = ExtResource("6_lj884")
-
-[node name="SpineBoneEye" type="SpineBoneNode" parent="SpineSprite"]
-bone_name = "Touch_Eye"
-
-[node name="SpineBoneTouch" type="SpineBoneNode" parent="SpineSprite"]
-bone_name = "Touch_Point"
+update_mode = 1
+script = ExtResource("5_4j5ol")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -900)
