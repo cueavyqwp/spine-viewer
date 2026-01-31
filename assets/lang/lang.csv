@@ -1,18 +1,7 @@
 keys,en,zh
-Language,English,简体中文
+LanguageName,English,简体中文
 Info,Camera position:{0}\nCamera angle:{1}°\nCamera zoom:{2}\nFPS:{3},镜头位置:{0}\n镜头角度:{1}°\n镜头缩放:{2}\n帧率:{3}
 CameraLock,(Locked),(已锁定)
-FileDialogCancel,Cancel,取消
-FileDialogTitle0,Open a File,选择一个文件
-FileDialogOK0,Open,选择
-FileDialogTitle1,Open File(s),选择一些文件
-FileDialogOK1,Open,选择
-FileDialogTitle2,Open a Directory,选择一个文件夹
-FileDialogOK2,Select Current Folder,选择当前文件夹
-FileDialogTitle3,Open a File or Directory,选择一个文件或文件夹
-FileDialogOK3,Open,选择
-FileDialogTitle4,Save a File,保存文件至
-FileDialogOK4,Save,保存
 TabLobby,Memorial Lobby,记忆大厅
 TabAnimation,Animation,动画
 TabSetting,Settings,设置

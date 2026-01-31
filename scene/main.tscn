@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://stfwkixhy28h"]
+[gd_scene load_steps=12 format=3 uid="uid://stfwkixhy28h"]
 
 [ext_resource type="Script" uid="uid://dbfrwj35brjkb" path="res://script/Main.cs" id="1_4j5ol"]
 [ext_resource type="Script" uid="uid://dntme8x7pnu64" path="res://script/Info.cs" id="2_4j5ol"]
-[ext_resource type="Script" uid="uid://cwl7j17dtanmk" path="res://script/FileSelect.cs" id="3_of57s"]
-[ext_resource type="Script" uid="uid://bjnweu6ih2igc" path="res://script/TabBar.cs" id="4_p1hux"]
+[ext_resource type="Script" uid="uid://dxcssmxbid8k4" path="res://script/L18n.cs" id="3_0ha60"]
 [ext_resource type="Script" uid="uid://bhntyiq6cwtlp" path="res://script/Sprite.cs" id="5_4j5ol"]
 [ext_resource type="Script" uid="uid://dxddlhll58r22" path="res://script/Camera.cs" id="6_4j5ol"]
 
@@ -82,14 +81,6 @@ label_settings = SubResource("LabelSettings_a55bd")
 vertical_alignment = 2
 script = ExtResource("2_4j5ol")
 
-[node name="FileDialog" type="FileDialog" parent="CanvasLayer/UI"]
-initial_position = 4
-size = Vector2i(800, 600)
-access = 2
-show_hidden_files = true
-use_native_dialog = true
-script = ExtResource("3_of57s")
-
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
 anchors_preset = 15
@@ -106,7 +97,6 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
 current_tab = 2
 tab_focus_mode = 0
-script = ExtResource("4_p1hux")
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
 visible = false
@@ -199,6 +189,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 focus_mode = 0
+script = ExtResource("3_0ha60")
 
 [node name="LanguageLabel" type="Label" parent="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl"]
 layout_mode = 1
@@ -233,4 +224,5 @@ script = ExtResource("6_4j5ol")
 
 [connection signal="tab_changed" from="CanvasLayer/UI/TabContainer" to="SpineSprite" method="TabChanged"]
 [connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemSelected"]
+[connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl/LanguageButton" to="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl/LanguageButton" method="OnChanged"]
 [connection signal="animation_event" from="SpineSprite" to="SpineSprite" method="OnEvent"]

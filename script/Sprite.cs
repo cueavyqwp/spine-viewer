@@ -113,7 +113,6 @@ public partial class Sprite : SpineSprite
 			LastIdleR = -1;
 		}
 		// TODO: ColorAdjustments
-		GD.Print(adjustment.postExposure.m_Value);
 	}
 	public void UnLoad()
 	{

@@ -1,7 +1,10 @@
 <div align = "center" >
     <h1>spine-viewer</h1>
 
+简体中文 | [English](/docs/README-en.md)
+
 **基于Godot的Spine4查看器**
+
 
 </div>
 
