@@ -6,10 +6,15 @@ using static TrackId;
 public partial class Sprite : SpineSprite
 {
 	public Node SpriteLoader;
+	[Export]
 	public OptionButton OptionAnimation;
+	[Export]
 	public CheckButton IdleButton;
+	[Export]
 	public CheckButton LoopButton;
+	[Export]
 	public AudioStreamPlayer BGMPlayer;
+	[Export]
 	public AudioStreamPlayer TalkPlayer;
 	Dictionary<string, string> OptionDict = [];
 	public bool IsLobbyTable = true;
@@ -141,11 +146,6 @@ public partial class Sprite : SpineSprite
 	{
 		SkeletonDataRes = null;
 		SpriteLoader = GetNode<Node>("/root/SpriteLoader");
-		OptionAnimation = GetNode<OptionButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation");
-		IdleButton = GetNode<CheckButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/IdleButton");
-		LoopButton = GetNode<CheckButton>("/root/Root/CanvasLayer/UI/TabContainer/TabAnimation/LoopButton");
-		BGMPlayer = GetNode<AudioStreamPlayer>("BGM");
-		TalkPlayer = GetNode<AudioStreamPlayer>("Talk");
 		GetTree().Root.FilesDropped += OnFilesDropped;
 	}
 	public void TryIdle()
@@ -158,8 +158,8 @@ public partial class Sprite : SpineSprite
 	}
 	public void Reset()
 	{
-		AnimationState.ClearTracks();
-		Skeleton.SetToSetupPose();
+		AnimationState?.ClearTracks();
+		Skeleton?.SetToSetupPose();
 	}
 	public void UpdateOption()
 	{

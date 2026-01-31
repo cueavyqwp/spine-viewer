@@ -40,8 +40,9 @@ content_margin_bottom = 12.0
 bg_color = Color(0.306923, 0.306923, 0.306923, 1)
 border_width_top = 4
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_4j5ol")
+UI = NodePath("CanvasLayer/UI")
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -1
@@ -52,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.362829, 0.362829, 0.362829, 1)
+color = Color(0.41981313, 0.41981313, 0.4198131, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -105,7 +106,6 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
 current_tab = 0
 tab_focus_mode = 0
-deselect_enabled = true
 script = ExtResource("4_p1hux")
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
@@ -163,9 +163,14 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="SpineSprite" type="SpineSprite" parent="."]
+[node name="SpineSprite" type="SpineSprite" parent="." node_paths=PackedStringArray("OptionAnimation", "IdleButton", "LoopButton", "BGMPlayer", "TalkPlayer")]
 update_mode = 1
 script = ExtResource("5_4j5ol")
+OptionAnimation = NodePath("../CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation")
+IdleButton = NodePath("../CanvasLayer/UI/TabContainer/TabAnimation/IdleButton")
+LoopButton = NodePath("../CanvasLayer/UI/TabContainer/TabAnimation/LoopButton")
+BGMPlayer = NodePath("BGM")
+TalkPlayer = NodePath("Talk")
 
 [node name="BGM" type="AudioStreamPlayer" parent="SpineSprite"]
 

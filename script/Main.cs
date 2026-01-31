@@ -5,7 +5,9 @@ public partial class Main : Node2D
 {
 	[Export]
 	bool ShowHUD = true;
+	[Export]
 	bool Lock = false;
+	[Export]
 	Control UI;
 	public void ChangeHUD()
 	{
@@ -21,7 +23,6 @@ public partial class Main : Node2D
 	}
 	public override void _Ready()
 	{
-		UI = GetNode<Control>("CanvasLayer/UI");
 		GetViewport().SizeChanged += () =>
 		{
 			if (Lock)
