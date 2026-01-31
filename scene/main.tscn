@@ -95,11 +95,10 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
-current_tab = 2
+current_tab = 0
 tab_focus_mode = 0
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -150,6 +149,7 @@ button_pressed = true
 text = "LoopButton"
 
 [node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 

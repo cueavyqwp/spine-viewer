@@ -51,3 +51,26 @@ public class ColorAdjustFile
 [JsonSourceGenerationOptions(IncludeFields = true)]
 [JsonSerializable(typeof(ColorAdjustFile))]
 public partial class ColorAdjustFileType : JsonSerializerContext { }
+
+public enum TrackId : int
+{
+    StartIdle,
+    Idle,
+    IdleR,
+    General0,
+    General1,
+    General2,
+    General3,
+    TalkA,
+    TalkM,
+    LookA,
+    LookM,
+    PatA,
+    PatM,
+    PinchA,
+    PinchM,
+    General4,
+    General5,
+    General6,
+    General7,
+}
