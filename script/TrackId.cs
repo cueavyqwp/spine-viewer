@@ -1,9 +1,12 @@
 public enum TrackId : int
 {
+	StartIdle,
 	Idle,
 	IdleR,
 	General0,
 	General1,
+	General2,
+	General3,
 	TalkA,
 	TalkM,
 	LookA,
@@ -12,6 +15,8 @@ public enum TrackId : int
 	PatM,
 	PinchA,
 	PinchM,
-	General2,
-	General3,
+	Genera4,
+	General5,
+	General6,
+	General7,
 }
