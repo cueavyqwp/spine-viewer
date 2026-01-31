@@ -1,5 +1,6 @@
 keys,en,zh
-Info,Camera Position:${pos}\nCamera Zoom:${zoom}\nFPS:${fps},镜头位置:${pos}\n镜头缩放:${zoom}\n帧率:${fps}
+Language,English,简体中文
+Info,Camera position:{0}\nCamera angle:{1}°\nCamera zoom:{2}\nFPS:{3},镜头位置:{0}\n镜头角度:{1}°\n镜头缩放:{2}\n帧率:{3}
 CameraLock,(Locked),(已锁定)
 FileDialogCancel,Cancel,取消
 FileDialogTitle0,Open a File,选择一个文件
@@ -15,5 +16,6 @@ FileDialogOK4,Save,保存
 TabLobby,Memorial Lobby,记忆大厅
 TabAnimation,Animation,动画
 TabSetting,Settings,设置
+LanguageLabel,Language,语言(Language)
 IdleButton,Idle,待机
 LoopButton,Loop,循环

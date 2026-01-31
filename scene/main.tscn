@@ -227,6 +227,7 @@ TalkPlayer = NodePath("Talk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -900)
+ignore_rotation = false
 zoom = Vector2(0.42, 0.42)
 script = ExtResource("6_4j5ol")
 

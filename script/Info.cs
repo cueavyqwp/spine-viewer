@@ -26,10 +26,13 @@ public partial class Info : Label
 		if (_camera == null)
 			return;
 
-		Text = Tr("Info")
-			.Replace("${pos}", _camera.Position.ToString("0.##")
-				+ (_cameraLocked ? Tr("CameraLock") : ""))
-			.Replace("${zoom}", _camera.Zoom.X.ToString("0.##"))
-			.Replace("${fps}", Engine.GetFramesPerSecond().ToString());
+		Text = string.Format(
+			Tr("Info"),
+			_camera.Position.ToString("0.##") + (_cameraLocked ? Tr("CameraLock") : ""),
+			Mathf.RoundToInt(Mathf.RadToDeg(_camera.Rotation)),
+			_camera.Zoom.X.ToString("0.##"),
+			Engine.GetFramesPerSecond()
+		);
+
 	}
 }
