@@ -104,11 +104,12 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
-current_tab = 0
+current_tab = 2
 tab_focus_mode = 0
 script = ExtResource("4_p1hux")
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -159,9 +160,57 @@ button_pressed = true
 text = "LoopButton"
 
 [node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UI/TabContainer/TabSetting"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 20.0
+offset_right = -100.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LanguageControl" type="Control" parent="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="LanguageButton" type="OptionButton" parent="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 5.0
+offset_right = 256.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_mode = 0
+
+[node name="LanguageLabel" type="Label" parent="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 15.0
+offset_right = 4.0
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "LanguageLabel"
 
 [node name="SpineSprite" type="SpineSprite" parent="." node_paths=PackedStringArray("OptionAnimation", "IdleButton", "LoopButton", "BGMPlayer", "TalkPlayer")]
 update_mode = 1

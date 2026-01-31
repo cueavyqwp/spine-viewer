@@ -6,9 +6,10 @@ public partial class Main : Node2D
 	[Export]
 	bool ShowHUD = true;
 	[Export]
-	bool Lock = false;
-	[Export]
 	Control UI;
+	public Vector2 BaseSize = new((float)ProjectSettings.GetSetting("display/window/size/viewport_width"), (float)ProjectSettings.GetSetting("display/window/size/viewport_height")
+	);
+	private Vector2 LastSize = Vector2.Zero;
 	public void ChangeHUD()
 	{
 		ShowHUD = !ShowHUD;
@@ -25,19 +26,14 @@ public partial class Main : Node2D
 	{
 		GetViewport().SizeChanged += () =>
 		{
-			if (Lock)
+			if (LastSize == DisplayServer.WindowGetSize())
 			{
 				return;
 			}
-			Lock = true;
-			Vector2 Size = DisplayServer.ScreenGetSize();
-			Vector2 Scale = new()
-			{
-				X = Size.X / (float)ProjectSettings.GetSetting("display/window/size/viewport_width"),
-				Y = Size.Y / (float)ProjectSettings.GetSetting("display/window/size/viewport_height")
-			};
+			Vector2 Size = DisplayServer.WindowGetSize();
+			LastSize = Size;
+			Vector2 Scale = Size / BaseSize;
 			GetTree().Root.ContentScaleFactor = Math.Min(Scale.X, Scale.Y);
-			Lock = false;
 		};
 	}
 
