@@ -18,6 +18,7 @@ public partial class Sprite : SpineSprite
 	public AudioStreamPlayer BGMPlayer;
 	[Export]
 	public AudioStreamPlayer TalkPlayer;
+	public double LastIdleR;
 	Dictionary<string, string> OptionDict = [];
 	public bool IsLobbyTable = true;
 	public string DirPath = null;
@@ -99,15 +100,25 @@ public partial class Sprite : SpineSprite
 		DirPath = path;
 		Load(skel, atlas, adjustment);
 	}
+	public void UpDateLastIdleR() => LastIdleR = LastIdleR == -1 ? -1 : Time.GetUnixTimeFromSystem();
 	public void Load(string skel, string atlas, ColorAdjustFile adjustment = null)
 	{
 		SpriteLoader.Call("load", this, skel, atlas);
+		if (HasAnimation("Idle_01_R"))
+		{
+			LastIdleR = Time.GetUnixTimeFromSystem();
+		}
+		else
+		{
+			LastIdleR = -1;
+		}
 		// TODO: ColorAdjustments
 		GD.Print(adjustment.postExposure.m_Value);
 	}
 	public void UnLoad()
 	{
 		SkeletonDataRes = null;
+		LastIdleR = -1;
 		DirPath = null;
 	}
 	public void Init()
@@ -161,12 +172,12 @@ public partial class Sprite : SpineSprite
 	{
 		if (HasAnimation("Idle_01"))
 		{
-			GD.Print("Playing: Idle_01");
 			AnimationState.SetAnimation("Idle_01", trackId: (int)Idle);
 		}
 	}
 	public void Reset()
 	{
+		UpDateLastIdleR();
 		AnimationState?.ClearTracks();
 		Skeleton?.SetToSetupPose();
 	}
@@ -240,5 +251,9 @@ public partial class Sprite : SpineSprite
 	}
 	public override void _Process(double delta)
 	{
+		if (IsLobby && LastIdleR > 0 && Time.GetUnixTimeFromSystem() - LastIdleR > 20)
+		{
+			AnimationState.SetAnimation("Idle_01_R", false, (int)IdleR);
+		}
 	}
 }
