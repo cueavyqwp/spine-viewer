@@ -233,5 +233,4 @@ script = ExtResource("6_4j5ol")
 
 [connection signal="tab_changed" from="CanvasLayer/UI/TabContainer" to="SpineSprite" method="TabChanged"]
 [connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemSelected"]
-[connection signal="pressed" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemPressed"]
 [connection signal="animation_event" from="SpineSprite" to="SpineSprite" method="OnEvent"]

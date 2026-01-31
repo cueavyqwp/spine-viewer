@@ -2,7 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using static TrackId;
+
 public partial class Sprite : SpineSprite
 {
 	public Node SpriteLoader;
@@ -21,6 +23,7 @@ public partial class Sprite : SpineSprite
 	public string DirPath = null;
 	public void OnFilesDropped(string[] files)
 	{
+		ColorAdjustFile adjustment = null;
 		string adjustments;
 		string skel;
 		string atlas;
@@ -75,11 +78,16 @@ public partial class Sprite : SpineSprite
 			adjustments = Path.Combine(path, "ColorAdjustments.json");
 			if (File.Exists(adjustments))
 			{
-				GD.Print($"ColorAdjustments: {adjustments}");
-			}
-			else
-			{
-				adjustments = null;
+				try
+				{
+					adjustment = JsonSerializer.Deserialize(File.ReadAllText(adjustments), ColorAdjustFileType.Default.ColorAdjustFile);
+					GD.Print($"ColorAdjustments: {adjustments}");
+				}
+				catch (Exception error)
+				{
+					GD.Print($"Error during reading file: {error}\nFailed to read the file: {adjustments}");
+					return;
+				}
 			}
 		}
 		else
@@ -89,12 +97,13 @@ public partial class Sprite : SpineSprite
 		}
 		GD.Print($"OK: {skel}\n");
 		DirPath = path;
-		Load(skel, atlas, adjustments);
+		Load(skel, atlas, adjustment);
 	}
-	public void Load(string skel, string atlas, string adjustments = null)
+	public void Load(string skel, string atlas, ColorAdjustFile adjustment = null)
 	{
 		SpriteLoader.Call("load", this, skel, atlas);
 		// TODO: ColorAdjustments
+		GD.Print(adjustment.postExposure.m_Value);
 	}
 	public void UnLoad()
 	{
@@ -228,10 +237,6 @@ public partial class Sprite : SpineSprite
 		{
 			AnimationState.SetAnimation(name.Replace("_A", "_M"), loop, (int)General1);
 		}
-	}
-	public void ItemPressed()
-	{
-
 	}
 	public override void _Process(double delta)
 	{
