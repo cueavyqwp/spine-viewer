@@ -167,6 +167,25 @@ public partial class Sprite : SpineSprite
 		SpriteLoader = GetNode<Node>("/root/SpriteLoader");
 		GetTree().Root.FilesDropped += OnFilesDropped;
 	}
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressed("Load"))
+		{
+			var dialog = new FileDialog
+			{
+				FileMode = FileDialog.FileModeEnum.OpenAny,
+				Access = FileDialog.AccessEnum.Filesystem,
+				UseNativeDialog = true
+			};
+			dialog.Connect("file_selected", Callable.From<string>(path =>
+			{
+				OnFilesDropped([path]);
+			}));
+			AddChild(dialog);
+			dialog.PopupCentered();
+			return;
+		}
+	}
 	public void TryIdle()
 	{
 		if (HasAnimation("Idle_01"))
