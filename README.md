@@ -67,9 +67,13 @@
 
 # 导出
 
-首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载`Godot 4.5.1 带 C# 支持`与对应的导出模板
+首先从[这里](https://zh.esotericsoftware.com/spine-godot#%E4%B8%8B%E8%BD%BD-spine-godot-%E5%BC%95%E6%93%8E%E6%A8%A1%E5%9D%97)下载`Godot 4.6.1 带 C# 支持`与对应的导出模板
 
 解压下载下来的编辑器,将`godot-editor-windows-mono/GodotSharp/Tools/nupkgs`下的包复制到`godot-nuget`文件夹内
+
+> [!NOTE]
+> 如果你已使用过原版带 C# 支持的 Godot,那么你可能需要清理 NuGet 缓存
+> `dotnet nuget locals all --clear`
 
 安装[.Net SDK](https://dotnet.microsoft.com/zh-cn/download)
 

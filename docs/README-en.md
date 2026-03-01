@@ -53,7 +53,11 @@ See at [README.md](/README.md#待办事项)
 
 # Export
 
-Go to [here](https://en.esotericsoftware.com/spine-godot#spine-godot-engine-module-downloads), download the `Godot 4.5.1 with C# support` and its Export templates
+Go to [here](https://en.esotericsoftware.com/spine-godot#spine-godot-engine-module-downloads), download the `Godot 4.6.1 with C# support` and its Export templates
+
+> [!NOTE]
+> If you have previously used the official Godot C# editor build, you have to clear your NuGet cache
+> `dotnet nuget locals all --clear`
 
 Unzip, then copy files from `godot-editor-windows-mono/GodotSharp/Tools/nupkgs` into `godot-nuget`
 

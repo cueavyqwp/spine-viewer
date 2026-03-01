@@ -24,7 +24,7 @@ public partial class L18n : OptionButton
 		var index = 0;
 		foreach (var locale in TranslationServer.GetLoadedLocales())
 		{
-			var name = TranslationServer.GetTranslationObject(locale).GetMessage("LanguageName");
+			var name = TranslationServer.FindTranslations(locale, true)[0].GetMessage("LanguageName");
 			AddItem($"{locale} : {name}");
 			if (Tr("LanguageName") == name)
 			{
