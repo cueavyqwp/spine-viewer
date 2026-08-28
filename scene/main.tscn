@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dbfrwj35brjkb" path="res://script/Main.cs" id="1_4j5ol"]
 [ext_resource type="Script" uid="uid://dntme8x7pnu64" path="res://script/Info.cs" id="2_4j5ol"]
 [ext_resource type="Script" uid="uid://dxcssmxbid8k4" path="res://script/L18n.cs" id="3_0ha60"]
+[ext_resource type="Script" uid="uid://hgrsnjhkwke4" path="res://script/FileLoader.cs" id="3_4j5ol"]
 [ext_resource type="Script" uid="uid://bhntyiq6cwtlp" path="res://script/Sprite.cs" id="5_4j5ol"]
 [ext_resource type="Script" uid="uid://dxddlhll58r22" path="res://script/Camera.cs" id="6_4j5ol"]
 
@@ -95,13 +96,32 @@ theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1atai")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_jpbxa")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_vbcij")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x6qbo")
-current_tab = 3
+current_tab = 0
 tab_focus_mode = 0
 
-[node name="TabFile" type="Control" parent="CanvasLayer/UI/TabContainer" unique_id=1312549314]
-visible = false
+[node name="TabFile" type="Control" parent="CanvasLayer/UI/TabContainer" unique_id=1312549314 node_paths=PackedStringArray("Option", "ASP")]
 layout_mode = 2
+script = ExtResource("3_4j5ol")
+Option = NodePath("FileOptionButton")
+ASP = NodePath("AudioStreamPlayer")
 metadata/_tab_index = 0
+
+[node name="FileOptionButton" type="OptionButton" parent="CanvasLayer/UI/TabContainer/TabFile" unique_id=1875761693]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 253.0
+offset_right = 736.0
+offset_bottom = 299.0
+
+[node name="GamePath" type="LineEdit" parent="CanvasLayer/UI/TabContainer/TabFile" unique_id=710943616]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 144.0
+offset_right = 760.0
+offset_bottom = 189.0
+focus_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/UI/TabContainer/TabFile" unique_id=1830002722]
 
 [node name="TabLobby" type="Control" parent="CanvasLayer/UI/TabContainer" unique_id=1219128685]
 visible = false
@@ -155,6 +175,7 @@ button_pressed = true
 text = "LoopButton"
 
 [node name="TabSetting" type="Control" parent="CanvasLayer/UI/TabContainer" unique_id=1053842857]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -229,6 +250,8 @@ script = ExtResource("6_4j5ol")
 
 [connection signal="tab_changed" from="CanvasLayer/UI/TabContainer" to="SpineSprite" method="TabChanged"]
 [connection signal="tab_changed" from="CanvasLayer/UI/TabContainer" to="Camera2D" method="TabChanged"]
+[connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabFile/FileOptionButton" to="CanvasLayer/UI/TabContainer/TabFile" method="OnItemSelected"]
+[connection signal="text_changed" from="CanvasLayer/UI/TabContainer/TabFile/GamePath" to="CanvasLayer/UI/TabContainer/TabFile" method="OnTextChanged"]
 [connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabAnimation/OptionAnimation" to="SpineSprite" method="ItemSelected"]
 [connection signal="item_selected" from="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl/LanguageButton" to="CanvasLayer/UI/TabContainer/TabSetting/ScrollContainer/MarginContainer/LanguageControl/LanguageButton" method="OnChanged"]
 [connection signal="animation_event" from="SpineSprite" to="SpineSprite" method="OnEvent"]
