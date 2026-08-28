@@ -55,6 +55,8 @@ public partial class Camera : Camera2D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!Enable)
+			return;
 		HandleToggleInput();
 		HandleWheelInput(@event);
 		HandleDragInput(@event);
@@ -145,8 +147,21 @@ public partial class Camera : Camera2D
 
 	/* ================= Update ================= */
 
+	public TabId Tab;
+	public bool Enable = true;
+
+	public void TabChanged(int TabNum)
+	{
+		Tab = (TabId)TabNum;
+		Enable = Tab == TabId.Lobby || Tab == TabId.Animation;
+		GD.Print($"[Camera] Change Tab to: {Tab} ({(Enable ? "Enable" : "Disable")})");
+	}
+
 	public override void _Process(double delta)
 	{
+		if (!Enable)
+			return;
+
 		if (!IsLock && !_dragging)
 			HandleKeyboardMove((float)delta);
 

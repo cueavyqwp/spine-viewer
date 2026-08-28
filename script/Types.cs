@@ -74,3 +74,11 @@ public enum TrackId : int
     General6,
     General7,
 }
+
+public enum TabId : int
+{
+    File,
+    Lobby,
+    Animation,
+    Setting
+}

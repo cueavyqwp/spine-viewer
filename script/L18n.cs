@@ -14,7 +14,7 @@ public partial class L18n : OptionButton
 	public void OnChanged(int index)
 	{
 		var locale = GetItemText(index).Split(" : ")[0];
-		GD.Print($"Change locale to {locale}");
+		GD.Print($"[L18n] Change locale to {locale}");
 		TranslationServer.SetLocale(locale);
 		Update();
 	}

@@ -35,7 +35,7 @@ public partial class Sprite : SpineSprite
 		var path = files[0];
 		if (!Path.Exists(path))
 		{
-			GD.Print($"File not found: {path}");
+			GD.Print($"[Sprite] File not found: {path}");
 		}
 		if (File.Exists(path))
 		{
@@ -46,34 +46,34 @@ public partial class Sprite : SpineSprite
 			files = Directory.GetFiles(path, "*.skel");
 			if (files.Length == 0)
 			{
-				GD.Print($"File(*.skel) not found in: {path}");
+				GD.Print($"[Sprite] File(*.skel) not found in: {path}");
 				return;
 			}
 			skel = files[0];
-			GD.Print($"Skel: {skel}");
+			GD.Print($"[Sprite] Skel: {skel}");
 			atlas = skel.Replace(".skel", ".atlas");
 			if (File.Exists(atlas))
 			{
-				GD.Print($"Atlas: {atlas}");
+				GD.Print($"[Sprite] Atlas: {atlas}");
 				try
 				{
 					foreach (var line in File.ReadAllLines(atlas))
 					{
 						if (line.EndsWith(".png") && (!File.Exists(Path.Combine(path, line))))
 						{
-							GD.Print($"Img not found: {line}");
+							GD.Print($"[Sprite] Img not found: {line}");
 							return;
 						}
 					}
 				}
 				catch (Exception error)
 				{
-					GD.Print($"Error during reading file: {error}\nFailed to read the file: {atlas}");
+					GD.Print($"[Sprite] Error during reading file: {error}\nFailed to read the file: {atlas}");
 				}
 			}
 			else
 			{
-				GD.Print($"File({Path.GetFileName(atlas)}) not found in: {path}");
+				GD.Print($"[Sprite] File({Path.GetFileName(atlas)}) not found in: {path}");
 				return;
 			}
 			adjustments = Path.Combine(path, "ColorAdjustments.json");
@@ -82,21 +82,21 @@ public partial class Sprite : SpineSprite
 				try
 				{
 					adjustment = JsonSerializer.Deserialize(File.ReadAllText(adjustments), ColorAdjustFileType.Default.ColorAdjustFile);
-					GD.Print($"ColorAdjustments: {adjustments}");
+					GD.Print($"[Sprite] ColorAdjustments: {adjustments}");
 				}
 				catch (Exception error)
 				{
-					GD.Print($"Error during reading file: {error}\nFailed to read the file: {adjustments}");
+					GD.Print($"[Sprite] Error during reading file: {error}\nFailed to read the file: {adjustments}");
 					return;
 				}
 			}
 		}
 		else
 		{
-			GD.Print($"Dir not found: {path}");
+			GD.Print($"[Sprite] Dir not found: {path}");
 			return;
 		}
-		GD.Print($"OK: {skel}\n");
+		GD.Print($"[Sprite] OK: {skel}\n");
 		DirPath = path;
 		Load(skel, atlas, adjustment);
 	}
@@ -122,7 +122,7 @@ public partial class Sprite : SpineSprite
 	}
 	public void Init()
 	{
-		GD.Print("See as: ", IsLobby ? "Lobby" : "Basic");
+		GD.Print("[Sprite] See as: ", IsLobby ? "Lobby" : "Basic");
 		UpdateOption();
 		TryIdle();
 	}
@@ -150,7 +150,7 @@ public partial class Sprite : SpineSprite
 		var path = Path.Combine(DirPath, "sound", @event.GetData().GetAudioPath().ToLower().Replace(".wav", ".ogg"));
 		if (!File.Exists(path))
 		{
-			GD.Print($"Sound not found: {path}");
+			GD.Print($"[Sprite] Sound not found: {path}");
 			return;
 		}
 		var data = File.ReadAllBytes(path);
@@ -224,19 +224,18 @@ public partial class Sprite : SpineSprite
 	}
 	public void TabChanged(int Tab)
 	{
-		switch (Tab)
+		switch ((TabId)Tab)
 		{
-			case 0:
+			case TabId.Lobby:
 				{
-					GD.Print("Table: Lobby");
 					IsLobbyTable = true;
 					Reset();
 					TryIdle();
+					GD.Print("[Sprite] Mode: Lobby");
 					return;
 				}
-			case 1:
+			case TabId.Animation:
 				{
-					GD.Print("Table: Animation");
 					IsLobbyTable = false;
 					UpdateOption();
 					var index = OptionAnimation.GetSelectedId();
@@ -244,6 +243,7 @@ public partial class Sprite : SpineSprite
 					{
 						ItemSelected(index);
 					}
+					GD.Print("[Sprite] Mode: Animation");
 					return;
 				}
 		}

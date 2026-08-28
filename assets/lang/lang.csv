@@ -2,6 +2,7 @@ keys,en,zh
 LanguageName,English,简体中文
 Info,Camera position:{0}\nCamera angle:{1}°\nCamera zoom:{2}\nFPS:{3},镜头位置:{0}\n镜头角度:{1}°\n镜头缩放:{2}\n帧率:{3}
 CameraLock,(Locked),(已锁定)
+TabFile,Load File,加载文件
 TabLobby,Memorial Lobby,记忆大厅
 TabAnimation,Animation,动画
 TabSetting,Settings,设置
